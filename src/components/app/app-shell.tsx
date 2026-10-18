@@ -5,7 +5,7 @@ import {
   History,
   Shield,
   LogOut,
-  Leaf,
+  ArrowLeft,
   FileText,
   FileSpreadsheet,
   Menu,
@@ -25,6 +25,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { AiCopilotSheet } from "./ai-copilot";
+import { Logo } from "@/components/site/header";
 
 export function AppShell({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -56,19 +57,14 @@ export function AppShell({ children }: { children: ReactNode }) {
     clearAuthCache();
     await logout();
     toast.success("Signed out");
-    window.location.href = "/auth";
+    window.location.href = "/";
   }
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Mobile Header */}
-      <header className="flex h-14 items-center justify-between border-b bg-sidebar px-4 text-sidebar-foreground md:hidden">
-        <div className="flex items-center gap-2">
-          <div className="grid h-8 w-8 place-items-center rounded-md bg-primary text-primary-foreground">
-            <Leaf className="h-4 w-4" />
-          </div>
-          <span className="font-display text-base">clisomumbai</span>
-        </div>
+      <header className="glass-strong flex h-16 items-center justify-between border-x-0 border-t-0 px-4 text-sidebar-foreground md:hidden">
+        <Logo />
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="ghost" size="icon" className="h-9 w-9">
@@ -77,16 +73,10 @@ export function AppShell({ children }: { children: ReactNode }) {
           </SheetTrigger>
           <SheetContent
             side="left"
-            className="w-60 bg-sidebar text-sidebar-foreground p-0 flex flex-col"
+            className="glass-strong w-64 text-sidebar-foreground p-0 flex flex-col"
           >
-            <div className="flex items-center gap-2 px-5 py-5 border-b">
-              <div className="grid h-8 w-8 place-items-center rounded-md bg-primary text-primary-foreground">
-                <Leaf className="h-4 w-4" />
-              </div>
-              <div>
-                <span className="font-display text-lg block leading-none">clisomumbai</span>
-                <span className="text-[10px] text-muted-foreground">Climate Social Mumbai</span>
-              </div>
+            <div className="border-b px-5 py-5">
+              <Logo />
             </div>
             <nav className="flex-1 space-y-1 px-3 mt-4">
               {nav.map((n) => {
@@ -96,10 +86,10 @@ export function AppShell({ children }: { children: ReactNode }) {
                     key={n.to}
                     to={n.to}
                     className={cn(
-                      "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors",
+                      "flex items-center gap-3 rounded-xl px-3 py-2 text-sm transition-colors",
                       active
-                        ? "bg-sidebar-accent text-sidebar-accent-foreground font-medium"
-                        : "text-muted-foreground hover:bg-sidebar-accent/60 hover:text-foreground",
+                        ? "bg-periwinkle/15 text-white font-medium shadow-[inset_2px_0_0_0_#736CED]"
+                        : "text-muted-foreground hover:bg-white/[0.04] hover:text-foreground",
                     )}
                   >
                     <n.icon className="h-4 w-4" />
@@ -122,15 +112,12 @@ export function AppShell({ children }: { children: ReactNode }) {
       </header>
 
       {/* Desktop Sidebar */}
-      <aside className="fixed inset-y-0 left-0 hidden w-60 flex-col border-r bg-sidebar text-sidebar-foreground md:flex">
-        <div className="flex items-center gap-2.5 px-5 py-5">
-          <div className="grid h-8 w-8 place-items-center rounded-md bg-primary text-primary-foreground">
-            <Leaf className="h-4 w-4" />
-          </div>
-          <div>
-            <span className="font-display text-lg block leading-tight">clisomumbai</span>
-            <span className="text-[10px] text-muted-foreground block">Climate Social Mumbai</span>
-          </div>
+      <aside className="glass-strong fixed inset-y-0 left-0 hidden w-60 flex-col border-y-0 border-l-0 text-sidebar-foreground md:flex">
+        <div className="px-5 py-6">
+          <Logo />
+          <p className="mt-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-lavender">
+            clisomumbai workspace
+          </p>
         </div>
         <nav className="flex-1 space-y-1 px-3">
           {nav.map((n) => {
@@ -140,10 +127,10 @@ export function AppShell({ children }: { children: ReactNode }) {
                 key={n.to}
                 to={n.to}
                 className={cn(
-                  "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors",
+                  "flex items-center gap-3 rounded-xl px-3 py-2 text-sm transition-colors",
                   active
-                    ? "bg-sidebar-accent text-sidebar-accent-foreground font-medium"
-                    : "text-muted-foreground hover:bg-sidebar-accent/60 hover:text-foreground",
+                    ? "bg-periwinkle/15 text-white font-medium shadow-[inset_2px_0_0_0_#736CED]"
+                    : "text-muted-foreground hover:bg-white/[0.04] hover:text-foreground",
                 )}
               >
                 <n.icon className="h-4 w-4" />
@@ -160,12 +147,13 @@ export function AppShell({ children }: { children: ReactNode }) {
       </aside>
 
       <main className="md:pl-60">
-        <div className="flex h-14 items-center justify-between border-b px-4 md:px-8 bg-background/50 backdrop-blur-sm sticky top-0 z-10">
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">
-              Climate Social Mumbai
-            </span>
-          </div>
+        <div className="flex h-14 items-center justify-between border-b px-4 md:px-8 bg-void/60 backdrop-blur-xl sticky top-0 z-10">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground hover:text-white"
+          >
+            <ArrowLeft className="h-3.5 w-3.5" /> CliSo Tech website
+          </Link>
           <div className="flex items-center gap-3">
             <AiCopilotSheet />
           </div>

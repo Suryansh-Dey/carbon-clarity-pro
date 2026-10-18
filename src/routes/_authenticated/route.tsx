@@ -4,11 +4,6 @@ import { fetchCurrentUser } from "@/lib/auth";
 export const Route = createFileRoute("/_authenticated")({
   ssr: false,
   beforeLoad: async () => {
-    if (typeof window !== "undefined" && localStorage.getItem("demo_user_session") === "true") {
-      return {
-        user: { id: "demo-user-id", email: "demo@clisomumbai.com", name: "Demo User", picture: "" },
-      };
-    }
     const user = await fetchCurrentUser();
     if (!user) {
       throw redirect({ to: "/auth" });

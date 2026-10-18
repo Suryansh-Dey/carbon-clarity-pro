@@ -1,12 +1,21 @@
-<!-- LOVABLE:BEGIN -->
+# Dev workflow
+- Never commit of push anything to github
+- You are allowed to modify the existing tech stack.
 
-> [!IMPORTANT]
-> This project is connected to [Lovable](https://lovable.dev). Avoid rewriting
-> published git history — force pushing, or rebasing/amending/squashing commits
-> that are already pushed — as it rewrites history on Lovable's side and the
-> user will likely lose their project history.
->
-> Commits you push to the connected branch sync back to Lovable and show up in
-> the editor, so keep the branch in a working state.
+You are a professional Frontend designer and supposed to re-organize the UI of this website.
+Use [groww](https://groww.in/) for reference of animations and static UI.
+Try using beautiful 3D animations for transitions with following color pallet:
+## Color Palette Overview
+Void Black (#030306) – Primary deep space background canvas
+Deep Midnight Navy (#0A0B1A) – Secondary elevated surfaces, glass cards, and modals
+Cosmic Indigo (#1F1D59) – Top-left volumetric spotlight and radial ambient glow
+Electric Periwinkle (#736CED) – Primary brand accent, interactive buttons, and highlights
+Soft Lavender Blue (#9FA2E8) – Secondary accents, 3D particle highlights, and gradient text
+Pure Crisp White (#FFFFFF) – High-contrast editorial typography and primary UI icons
+Muted Slate Gray (#8E92AA) – Body copy, navigation links, and subtle hairline borders
 
-<!-- LOVABLE:END -->
+# Content
+Website should have the details mentioned in [here](./WEBSITE.md). Keep the already existing details except you are allowed to re-organize the layout.
+Only the calculator tool is accessible after google login, rest should be visible without login.
+
+If you need any design suggestion or digress from provided instruction, you must ask about that in chat first.

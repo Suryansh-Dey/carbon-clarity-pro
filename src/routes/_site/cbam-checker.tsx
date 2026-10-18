@@ -1,7 +1,6 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, useMemo } from "react";
 import {
-  Leaf,
   Globe,
   Shield,
   ArrowRight,
@@ -31,10 +30,10 @@ import { toast } from "sonner";
 import { jsPDF } from "jspdf";
 import { HSN_CN_DATABASE, HsnCnMapping } from "@/lib/cbam";
 
-export const Route = createFileRoute("/cbam-checker")({
+export const Route = createFileRoute("/_site/cbam-checker")({
   head: () => ({
     meta: [
-      { title: "Free EU CBAM Exposure & Penalty Calculator — clisomumbai" },
+      { title: "Free EU CBAM Exposure & Penalty Calculator — CliSo Tech" },
       {
         name: "description",
         content:
@@ -100,13 +99,8 @@ function CbamCheckerPage() {
   const totalSavingsEur = Math.max(0, defaultGrossLiabilityEur - factoryNetLiabilityEur);
   const totalSavingsInr = totalSavingsEur * inrToEurRate;
 
-  const handleLaunchDemo = () => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("demo_user_session", "true");
-    }
-    toast.success("Welcome to Demo Workspace");
-    navigate({ to: "/dashboard" });
-  };
+  // The full CBAM Hub lives in the signed-in workspace.
+  const handleLaunchDemo = () => navigate({ to: "/cbam" });
 
   const handleDownloadRiskBrief = () => {
     const doc = new jsPDF({ unit: "pt", format: "a4" });
@@ -146,14 +140,34 @@ function CbamCheckerPage() {
     doc.setFont("helvetica", "normal");
     doc.setFontSize(8.5);
     doc.setTextColor(80, 100, 90);
-    doc.text(`Indian HSN: ${selectedProduct.hsnCode} | EU CN Code: ${selectedProduct.cnCode}`, 58, 144);
-    doc.text(`Annual EU Export Volume: ${exportVolumeTonnes.toLocaleString()} MT | Destination: ${euDestination}`, 58, 158);
+    doc.text(
+      `Indian HSN: ${selectedProduct.hsnCode} | EU CN Code: ${selectedProduct.cnCode}`,
+      58,
+      144,
+    );
+    doc.text(
+      `Annual EU Export Volume: ${exportVolumeTonnes.toLocaleString()} MT | Destination: ${euDestination}`,
+      58,
+      158,
+    );
 
     // Summary Cards
     const kpis = [
-      { label: "Default Tariff Risk", val: `€${Math.round(defaultGrossLiabilityEur).toLocaleString()}`, sub: `₹${(defaultLiabilityInr / 10000000).toFixed(2)} Cr` },
-      { label: "Verified Primary Data", val: `€${Math.round(factoryNetLiabilityEur).toLocaleString()}`, sub: `₹${(factoryNetLiabilityInr / 10000000).toFixed(2)} Cr` },
-      { label: "Tariff Savings", val: `€${Math.round(totalSavingsEur).toLocaleString()}`, sub: `₹${(totalSavingsInr / 10000000).toFixed(2)} Cr Saved` },
+      {
+        label: "Default Tariff Risk",
+        val: `€${Math.round(defaultGrossLiabilityEur).toLocaleString()}`,
+        sub: `₹${(defaultLiabilityInr / 10000000).toFixed(2)} Cr`,
+      },
+      {
+        label: "Verified Primary Data",
+        val: `€${Math.round(factoryNetLiabilityEur).toLocaleString()}`,
+        sub: `₹${(factoryNetLiabilityInr / 10000000).toFixed(2)} Cr`,
+      },
+      {
+        label: "Tariff Savings",
+        val: `€${Math.round(totalSavingsEur).toLocaleString()}`,
+        sub: `₹${(totalSavingsInr / 10000000).toFixed(2)} Cr Saved`,
+      },
       { label: "Penalty Fine Risk", val: `€69 / t`, sub: "Non-compliance rate" },
     ];
 
@@ -203,10 +217,30 @@ function CbamCheckerPage() {
     currentY += 20;
 
     const rows = [
-      { label: "Default EU Benchmark (Worst-case default)", see: `${selectedProduct.defaultEuBenchmarkSEE.toFixed(2)} t/t`, total: `${Math.round(defaultTotalEmissionsTCO2e).toLocaleString()} t`, liability: `€${Math.round(defaultGrossLiabilityEur).toLocaleString()}` },
-      { label: "Verified Primary Factory Data (Actual ledger)", see: `${factorySEE.toFixed(2)} t/t`, total: `${Math.round(factoryTotalEmissionsTCO2e).toLocaleString()} t`, liability: `€${Math.round(factoryGrossLiabilityEur).toLocaleString()}` },
-      { label: "Article 9 Deduction (India Domestic CCTS Carbon Price)", see: "—", total: "—", liability: `-€${Math.round(carbonPriceDeductionEur).toLocaleString()}` },
-      { label: "NET PAYABLE CBAM CERTIFICATE COST", see: `${factorySEE.toFixed(2)} t/t`, total: `${Math.round(factoryTotalEmissionsTCO2e).toLocaleString()} t`, liability: `€${Math.round(factoryNetLiabilityEur).toLocaleString()}` },
+      {
+        label: "Default EU Benchmark (Worst-case default)",
+        see: `${selectedProduct.defaultEuBenchmarkSEE.toFixed(2)} t/t`,
+        total: `${Math.round(defaultTotalEmissionsTCO2e).toLocaleString()} t`,
+        liability: `€${Math.round(defaultGrossLiabilityEur).toLocaleString()}`,
+      },
+      {
+        label: "Verified Primary Factory Data (Actual ledger)",
+        see: `${factorySEE.toFixed(2)} t/t`,
+        total: `${Math.round(factoryTotalEmissionsTCO2e).toLocaleString()} t`,
+        liability: `€${Math.round(factoryGrossLiabilityEur).toLocaleString()}`,
+      },
+      {
+        label: "Article 9 Deduction (India Domestic CCTS Carbon Price)",
+        see: "—",
+        total: "—",
+        liability: `-€${Math.round(carbonPriceDeductionEur).toLocaleString()}`,
+      },
+      {
+        label: "NET PAYABLE CBAM CERTIFICATE COST",
+        see: `${factorySEE.toFixed(2)} t/t`,
+        total: `${Math.round(factoryTotalEmissionsTCO2e).toLocaleString()} t`,
+        liability: `€${Math.round(factoryNetLiabilityEur).toLocaleString()}`,
+      },
     ];
 
     rows.forEach((r, idx) => {
@@ -242,9 +276,21 @@ function CbamCheckerPage() {
     doc.setFont("helvetica", "normal");
     doc.setFontSize(8);
     doc.setTextColor(80, 100, 90);
-    doc.text(`By replacing default European benchmarks with verified primary plant data via clisomumbai, your enterprise saves`, 58, currentY + 36);
-    doc.text(`an estimated €${Math.round(totalSavingsEur).toLocaleString()} (~₹${(totalSavingsInr / 10000000).toFixed(2)} Crore) annually and completely eliminates non-compliance penalties.`, 58, currentY + 48);
-    doc.text(`Generate your official DG TAXUD XML quarterly filing directly at https://clisomumbai.com`, 58, currentY + 62);
+    doc.text(
+      `By replacing default European benchmarks with verified primary plant data via clisomumbai, your enterprise saves`,
+      58,
+      currentY + 36,
+    );
+    doc.text(
+      `an estimated €${Math.round(totalSavingsEur).toLocaleString()} (~₹${(totalSavingsInr / 10000000).toFixed(2)} Crore) annually and completely eliminates non-compliance penalties.`,
+      58,
+      currentY + 48,
+    );
+    doc.text(
+      `Generate your official DG TAXUD XML quarterly filing directly at https://clisomumbai.com`,
+      58,
+      currentY + 62,
+    );
 
     // Footer
     doc.setFillColor(245, 248, 246);
@@ -252,67 +298,51 @@ function CbamCheckerPage() {
     doc.setFont("helvetica", "normal");
     doc.setFontSize(7.5);
     doc.setTextColor(100, 120, 110);
-    doc.text("Generated by clisomumbai (Climate Social Mumbai) — Instant EU CBAM Exposure Calculator.", 54, H - 48);
-    doc.text("Methodology aligned with EU Regulation 2023/956 & Implementing Regulation 2023/1773.", 54, H - 36);
+    doc.text(
+      "Generated by clisomumbai (Climate Social Mumbai) — Instant EU CBAM Exposure Calculator.",
+      54,
+      H - 48,
+    );
+    doc.text(
+      "Methodology aligned with EU Regulation 2023/956 & Implementing Regulation 2023/1773.",
+      54,
+      H - 36,
+    );
 
     doc.save(`clisomumbai-cbam-exposure-brief-${selectedHsn}.pdf`);
     toast.success("Downloaded Executive CBAM Risk Brief PDF.");
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="pt-24">
       {/* Top Banner */}
-      <header className="border-b border-border/80 bg-muted/40 px-4 py-2.5 text-center text-xs text-muted-foreground">
-        <span className="font-semibold text-foreground">EU CBAM Penalty Alert:</span> Importers without verified primary plant data face a{" "}
+      <div className="mx-auto mt-4 w-fit max-w-[92%] rounded-full border border-white/10 bg-white/[0.03] px-5 py-2 text-center text-xs text-muted-foreground backdrop-blur">
+        <span className="font-semibold text-foreground">EU CBAM Penalty Alert:</span> Importers
+        without verified primary plant data face a{" "}
         <span className="font-semibold text-primary">€69 / tonne penalty fine</span> starting 2026.
-      </header>
-
-      {/* Main Navigation */}
-      <div className="border-b border-border bg-card">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <Link to="/" className="flex items-center gap-2.5">
-            <div className="grid h-8 w-8 place-items-center rounded-lg bg-primary text-primary-foreground">
-              <Leaf className="h-4 w-4" />
-            </div>
-            <div className="flex items-baseline gap-2">
-              <span className="font-display text-xl tracking-tight text-foreground">clisomumbai</span>
-              <span className="text-xs text-muted-foreground">· CBAM Risk Checker</span>
-            </div>
-          </Link>
-
-          <div className="flex items-center gap-3">
-            <Link
-              to="/auth"
-              className="text-xs font-medium text-muted-foreground hover:text-foreground px-3 py-1.5"
-            >
-              Sign In
-            </Link>
-            <Button onClick={handleLaunchDemo} size="sm" className="text-xs font-medium h-9">
-              Open Full Platform <ArrowRight className="h-3.5 w-3.5 ml-1.5" />
-            </Button>
-          </div>
-        </div>
       </div>
 
       {/* Main Content */}
       <main className="py-12 md:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         {/* Title */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3.5 py-1 text-xs font-medium text-muted-foreground shadow-xs">
+          <div className="inline-flex items-center gap-2 rounded-full border border-border glass px-3.5 py-1 text-xs font-medium text-muted-foreground shadow-xs">
             <Globe className="h-3.5 w-3.5 text-primary" /> Free Interactive Assessment
           </div>
-          <h1 className="font-display text-3xl sm:text-5xl font-normal tracking-tight text-foreground">
-            Is Your Product Subject to EU CBAM Tariffs?
+          <h1 className="font-display text-4xl sm:text-6xl font-normal tracking-tight text-foreground">
+            Is Your Product Subject to{" "}
+            <span className="text-gradient italic">EU CBAM Tariffs?</span>
           </h1>
           <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-            Select your Indian commodity HSN code and annual European export volume to calculate your exact financial liability, penalty risk, and primary data savings in 30 seconds.
+            Select your Indian commodity HSN code and annual European export volume to calculate
+            your exact financial liability, penalty risk, and primary data savings in 30 seconds.
           </p>
         </div>
 
         {/* Interactive Calculator Grid */}
         <div className="grid lg:grid-cols-12 gap-8 items-start">
           {/* Input Form Card */}
-          <Card className="lg:col-span-5 rounded-2xl border-border bg-card shadow-sm">
+          <Card className="lg:col-span-5 rounded-2xl border-border glass shadow-sm">
             <CardHeader className="pb-4">
               <CardTitle className="text-base font-semibold flex items-center gap-2">
                 <Sliders className="h-4 w-4 text-primary" /> Step 1: Export Shipment Details
@@ -335,7 +365,10 @@ function CbamCheckerPage() {
                   </SelectContent>
                 </Select>
                 <div className="flex items-center gap-2 pt-1 text-[11px] text-muted-foreground">
-                  <span>EU CN Code: <strong className="text-foreground font-mono">{selectedProduct.cnCode}</strong></span>
+                  <span>
+                    EU CN Code:{" "}
+                    <strong className="text-foreground font-mono">{selectedProduct.cnCode}</strong>
+                  </span>
                   <span>·</span>
                   <span className="capitalize">{selectedProduct.sector.replace("_", " ")}</span>
                 </div>
@@ -368,10 +401,14 @@ function CbamCheckerPage() {
                 </Select>
               </div>
 
-              <div className="p-3.5 rounded-xl border border-border/80 bg-muted/20 space-y-3">
+              <div className="p-3.5 rounded-xl border border-border/80 bg-white/[0.02] space-y-3">
                 <div className="flex items-center justify-between">
-                  <Label className="text-xs font-semibold">Factory Specific Emissions ($SEE$)</Label>
-                  <span className="font-mono text-xs text-primary font-medium">{factorySEE} tCO₂e/t</span>
+                  <Label className="text-xs font-semibold">
+                    Factory Specific Emissions ($SEE$)
+                  </Label>
+                  <span className="font-mono text-xs text-primary font-medium">
+                    {factorySEE} tCO₂e/t
+                  </span>
                 </div>
                 <Input
                   type="number"
@@ -381,7 +418,8 @@ function CbamCheckerPage() {
                   onChange={(e) => setFactorySEE(Number(e.target.value))}
                 />
                 <p className="text-[11px] text-muted-foreground">
-                  Typical Indian plant achieves {selectedProduct.typicalIndianSEE} t/t vs EU punitive default {selectedProduct.defaultEuBenchmarkSEE} t/t.
+                  Typical Indian plant achieves {selectedProduct.typicalIndianSEE} t/t vs EU
+                  punitive default {selectedProduct.defaultEuBenchmarkSEE} t/t.
                 </p>
               </div>
 
@@ -393,13 +431,15 @@ function CbamCheckerPage() {
                   value={cctsPaidInr}
                   onChange={(e) => setCctsPaidInr(Number(e.target.value))}
                 />
-                <p className="text-[10px] text-muted-foreground">Eligible for Article 9 credit deduction against EU certificate purchase.</p>
+                <p className="text-[10px] text-muted-foreground">
+                  Eligible for Article 9 credit deduction against EU certificate purchase.
+                </p>
               </div>
             </CardContent>
           </Card>
 
           {/* Results Output Card */}
-          <Card className="lg:col-span-7 rounded-2xl border-border bg-card shadow-sm space-y-5 p-6">
+          <Card className="lg:col-span-7 rounded-2xl border-border glass shadow-sm space-y-5 p-6">
             <div>
               <div className="flex items-center justify-between border-b border-border/80 pb-3">
                 <div>
@@ -434,18 +474,23 @@ function CbamCheckerPage() {
 
             {/* Side by side comparison */}
             <div className="grid grid-cols-2 gap-4">
-              <div className="p-4 rounded-xl border border-border/80 bg-muted/20 space-y-1">
-                <span className="text-xs text-muted-foreground block">Worst-Case Default EU Penalty</span>
+              <div className="p-4 rounded-xl border border-border/80 bg-white/[0.02] space-y-1">
+                <span className="text-xs text-muted-foreground block">
+                  Worst-Case Default EU Penalty
+                </span>
                 <span className="font-display text-2xl font-medium text-foreground block">
                   €{Math.round(defaultGrossLiabilityEur).toLocaleString()}
                 </span>
                 <span className="text-[11px] text-muted-foreground">
-                  ₹{(defaultLiabilityInr / 10000000).toFixed(2)} Cr at {selectedProduct.defaultEuBenchmarkSEE} t/t default
+                  ₹{(defaultLiabilityInr / 10000000).toFixed(2)} Cr at{" "}
+                  {selectedProduct.defaultEuBenchmarkSEE} t/t default
                 </span>
               </div>
 
               <div className="p-4 rounded-xl border border-primary/30 bg-primary/5 space-y-1">
-                <span className="text-xs text-primary font-medium block">Verified Plant Net Cost</span>
+                <span className="text-xs text-primary font-medium block">
+                  Verified Plant Net Cost
+                </span>
                 <span className="font-display text-2xl font-medium text-primary block">
                   €{Math.round(factoryNetLiabilityEur).toLocaleString()}
                 </span>
@@ -456,7 +501,7 @@ function CbamCheckerPage() {
             </div>
 
             {/* Timeline Checklist */}
-            <div className="p-4 rounded-xl border border-border/60 bg-muted/30 space-y-2 text-xs">
+            <div className="p-4 rounded-xl border border-border/60 bg-white/[0.03] space-y-2 text-xs">
               <span className="font-semibold text-foreground uppercase tracking-wider block text-[11px]">
                 EU CBAM Compliance Timeline Requirements
               </span>
@@ -482,11 +527,18 @@ function CbamCheckerPage() {
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row items-center gap-3 pt-2">
-              <Button onClick={handleDownloadRiskBrief} variant="outline" className="w-full sm:w-auto h-10 text-xs gap-2">
+              <Button
+                onClick={handleDownloadRiskBrief}
+                variant="outline"
+                className="w-full sm:w-auto h-10 text-xs gap-2"
+              >
                 <Download className="h-4 w-4" /> Download Executive Risk Brief PDF
               </Button>
-              <Button onClick={handleLaunchDemo} className="w-full sm:flex-1 h-10 text-xs font-medium gap-1.5">
-                Generate DG TAXUD XML in Demo Workspace <ArrowRight className="h-4 w-4" />
+              <Button
+                onClick={handleLaunchDemo}
+                className="w-full sm:flex-1 h-10 text-xs font-medium gap-1.5"
+              >
+                Generate DG TAXUD XML in Workspace <ArrowRight className="h-4 w-4" />
               </Button>
             </div>
           </Card>

@@ -5,9 +5,16 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ============================================================
-   Carbon — Editorial green / earth design system
+   CliSo — Deep-space design system
    Fonts: Fraunces (display serif) + Inter (body)
-   Palette: forest ink, moss, sage, bone, charcoal
+   Palette:
+     Void Black        #030306  page canvas
+     Deep Midnight     #0A0B1A  glass cards, modals
+     Cosmic Indigo     #1F1D59  spotlight / ambient glow
+     Electric Periwink #736CED  brand accent, buttons
+     Soft Lavender     #9FA2E8  secondary accent, gradient text
+     Pure White        #FFFFFF  editorial type, icons
+     Muted Slate       #8E92AA  body copy, nav, hairlines
    ============================================================ */
 
 @theme inline {
@@ -55,102 +62,82 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
+  /* Named palette */
+  --color-void: #030306;
+  --color-midnight: #0a0b1a;
+  --color-indigo-cosmic: #1f1d59;
+  --color-periwinkle: #736ced;
+  --color-lavender: #9fa2e8;
+  --color-slate-muted: #8e92aa;
+
+  /* Legacy editorial names used by app pages, remapped to the new palette */
   --color-ink: var(--ink);
   --color-moss: var(--moss);
   --color-sage: var(--sage);
   --color-bone: var(--bone);
   --color-clay: var(--clay);
+
+  /* Deep status shades were tuned for a light canvas; lift them for dark */
+  --color-emerald-700: oklch(0.79 0.15 163);
+  --color-emerald-800: oklch(0.84 0.13 163);
+  --color-emerald-900: oklch(0.9 0.09 163);
+  --color-sky-700: oklch(0.8 0.12 230);
+  --color-cyan-700: oklch(0.82 0.12 215);
+  --color-amber-700: oklch(0.84 0.15 75);
 }
 
 :root {
-  --radius: 0.75rem;
+  --radius: 0.875rem;
 
-  /* Editorial palette */
-  --bone: oklch(0.97 0.012 95);
-  --ink: oklch(0.3 0.048 155);
-  --moss: oklch(0.46 0.078 155);
-  --sage: oklch(0.88 0.065 130);
-  --clay: oklch(0.55 0.11 55);
+  --bone: #ffffff;
+  --ink: #0a0b1a;
+  --moss: #736ced;
+  --sage: #9fa2e8;
+  --clay: #9fa2e8;
 
-  --background: oklch(0.98 0.008 95); /* bone */
-  --foreground: oklch(0.18 0.02 155); /* deep forest ink */
+  --background: #030306;
+  --foreground: #ffffff;
 
-  --card: oklch(1 0 0);
-  --card-foreground: var(--foreground);
-  --popover: oklch(1 0 0);
-  --popover-foreground: var(--foreground);
+  --card: #0a0b1a;
+  --card-foreground: #ffffff;
+  --popover: #0a0b1a;
+  --popover-foreground: #ffffff;
 
-  --primary: oklch(0.3 0.052 155); /* forest */
-  --primary-foreground: oklch(0.97 0.012 95);
+  --primary: #736ced;
+  --primary-foreground: #ffffff;
 
-  --secondary: oklch(0.88 0.065 130); /* sage */
-  --secondary-foreground: oklch(0.22 0.03 155);
+  --secondary: #1f1d59;
+  --secondary-foreground: #ffffff;
 
-  --muted: oklch(0.94 0.012 100);
-  --muted-foreground: oklch(0.42 0.02 155);
+  --muted: #10112a;
+  --muted-foreground: #8e92aa;
 
-  --accent: oklch(0.55 0.11 55); /* clay */
-  --accent-foreground: oklch(0.97 0.012 95);
+  --accent: #1f1d59;
+  --accent-foreground: #ffffff;
 
-  --destructive: oklch(0.55 0.19 27);
-  --destructive-foreground: oklch(0.97 0.012 95);
+  --destructive: oklch(0.64 0.21 22);
+  --destructive-foreground: #ffffff;
 
-  --border: oklch(0.88 0.014 100);
-  --input: oklch(0.9 0.012 100);
-  --ring: oklch(0.46 0.078 155);
+  --border: rgb(142 146 170 / 0.16);
+  --input: rgb(142 146 170 / 0.22);
+  --ring: #736ced;
 
-  --chart-1: oklch(0.42 0.078 155);
-  --chart-2: oklch(0.62 0.09 130);
-  --chart-3: oklch(0.72 0.11 85);
-  --chart-4: oklch(0.55 0.11 55);
-  --chart-5: oklch(0.38 0.05 220);
+  --chart-1: #736ced;
+  --chart-2: #9fa2e8;
+  --chart-3: #4c45c9;
+  --chart-4: #c9cbf7;
+  --chart-5: #8e92aa;
 
-  --sidebar: oklch(0.96 0.014 100);
-  --sidebar-foreground: var(--foreground);
-  --sidebar-primary: var(--primary);
-  --sidebar-primary-foreground: var(--primary-foreground);
-  --sidebar-accent: oklch(0.92 0.028 130);
-  --sidebar-accent-foreground: var(--foreground);
-  --sidebar-border: var(--border);
-  --sidebar-ring: var(--ring);
-}
+  --sidebar: #05060e;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #736ced;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #1f1d59;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: rgb(142 146 170 / 0.12);
+  --sidebar-ring: #736ced;
 
-.dark {
-  --background: oklch(0.16 0.02 155);
-  --foreground: oklch(0.94 0.014 95);
-
-  --card: oklch(0.2 0.024 155);
-  --card-foreground: var(--foreground);
-  --popover: oklch(0.2 0.024 155);
-  --popover-foreground: var(--foreground);
-
-  --primary: oklch(0.86 0.08 130);
-  --primary-foreground: oklch(0.18 0.02 155);
-
-  --secondary: oklch(0.28 0.036 155);
-  --secondary-foreground: var(--foreground);
-
-  --muted: oklch(0.24 0.024 155);
-  --muted-foreground: oklch(0.72 0.02 100);
-
-  --accent: oklch(0.68 0.13 55);
-  --accent-foreground: oklch(0.16 0.02 155);
-
-  --destructive: oklch(0.68 0.19 27);
-  --destructive-foreground: oklch(0.97 0.012 95);
-
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.72 0.06 130);
-
-  --sidebar: oklch(0.14 0.02 155);
-  --sidebar-foreground: var(--foreground);
-  --sidebar-primary: oklch(0.86 0.08 130);
-  --sidebar-primary-foreground: oklch(0.18 0.02 155);
-  --sidebar-accent: oklch(0.22 0.028 155);
-  --sidebar-accent-foreground: var(--foreground);
-  --sidebar-border: oklch(1 0 0 / 8%);
-  --sidebar-ring: oklch(0.72 0.06 130);
+  color-scheme: dark;
 }
 
 @layer base {
@@ -159,9 +146,17 @@
   }
   html {
     font-family: var(--font-sans);
+    scroll-behavior: smooth;
+    background: #030306;
   }
   body {
+    min-height: 100vh;
     background-color: var(--color-background);
+    /* Top-left volumetric spotlight */
+    background-image:
+      radial-gradient(1100px 700px at -10% -15%, rgb(31 29 89 / 0.85), transparent 60%),
+      radial-gradient(800px 600px at 110% 10%, rgb(115 108 237 / 0.08), transparent 60%);
+    background-attachment: fixed;
     color: var(--color-foreground);
     font-feature-settings: "ss01", "cv11";
     -webkit-font-smoothing: antialiased;
@@ -172,12 +167,88 @@
   h4,
   .font-display {
     font-family: var(--font-display);
-    letter-spacing: -0.01em;
+    letter-spacing: -0.015em;
+  }
+  ::selection {
+    background: rgb(115 108 237 / 0.45);
+    color: #fff;
+  }
+  :focus-visible {
+    outline: 2px solid #736ced;
+    outline-offset: 2px;
   }
 }
 
 @utility text-balance {
   text-wrap: balance;
+}
+
+/* Gradient editorial text: white → lavender → periwinkle */
+@utility text-gradient {
+  background-image: linear-gradient(100deg, #ffffff 0%, #9fa2e8 45%, #736ced 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Elevated glass surface */
+@utility glass {
+  background: linear-gradient(180deg, rgb(15 16 38 / 0.78), rgb(10 11 26 / 0.62));
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid rgb(142 146 170 / 0.16);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.05),
+    0 24px 60px -30px rgb(0 0 0 / 0.8);
+}
+
+@utility glass-strong {
+  background: rgb(10 11 26 / 0.92);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  border: 1px solid rgb(142 146 170 / 0.18);
+}
+
+/* Glowing hairline border that lights up on hover */
+@utility glow-border {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: linear-gradient(140deg, rgb(159 162 232 / 0.55), transparent 35%, transparent 65%, rgb(115 108 237 / 0.5));
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.35;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+  &:hover::before {
+    opacity: 1;
+  }
+}
+
+/* Faint perspective grid used behind hero sections */
+@utility bg-grid {
+  background-image:
+    linear-gradient(rgb(142 146 170 / 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(142 146 170 / 0.07) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+}
+
+@utility card-elevated {
+  background: linear-gradient(180deg, rgb(15 16 38 / 0.8), rgb(10 11 26 / 0.7));
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.04),
+    0 16px 40px -24px rgb(0 0 0 / 0.8);
 }
 
 @utility grain {
@@ -187,21 +258,11 @@
     content: "";
     position: absolute;
     inset: 0;
-    background-image: radial-gradient(rgba(0, 0, 0, 0.035) 1px, transparent 1px);
+    background-image: radial-gradient(rgb(255 255 255 / 0.03) 1px, transparent 1px);
     background-size: 3px 3px;
     pointer-events: none;
-    mix-blend-mode: multiply;
     z-index: 0;
   }
-}
-
-@utility card-elevated {
-  background: color-mix(in oklab, var(--card) 96%, transparent);
-  backdrop-filter: blur(8px);
-  border: 1px solid var(--border);
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.6) inset,
-    0 8px 24px -12px oklch(0.3 0.048 155 / 0.15);
 }
 
 @keyframes rise {
@@ -219,15 +280,16 @@
 }
 
 @keyframes float-slow {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(-6px);
+    transform: translateY(-8px);
   }
 }
 @utility animate-float {
-  animation: float-slow 4s ease-in-out infinite;
+  animation: float-slow 5s ease-in-out infinite;
 }
 
 @keyframes marquee {
@@ -241,20 +303,45 @@
 @utility animate-marquee {
   display: flex;
   width: max-content;
-  animation: marquee 35s linear infinite;
+  animation: marquee 40s linear infinite;
 }
 
 @keyframes pulse-subtle {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
     transform: scale(1);
   }
   50% {
-    opacity: 0.8;
-    transform: scale(1.05);
+    opacity: 0.7;
+    transform: scale(1.08);
   }
 }
 @utility animate-pulse-subtle {
-  animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  animation: pulse-subtle 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
+@keyframes orbit {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@utility animate-orbit {
+  animation: orbit 40s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
