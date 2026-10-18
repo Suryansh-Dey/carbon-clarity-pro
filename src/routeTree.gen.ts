@@ -9,114 +9,72 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as AuthRouteImport } from './routes/auth'
-import { Route as SiteRouteRouteImport } from './routes/_site/route'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
-import { Route as SiteIndexRouteImport } from './routes/_site/index'
-import { Route as SiteServicesRouteImport } from './routes/_site/services'
-import { Route as SiteResourcesRouteImport } from './routes/_site/resources'
-import { Route as SitePlatformRouteImport } from './routes/_site/platform'
-import { Route as SiteInsightsRouteImport } from './routes/_site/insights'
-import { Route as SiteContactRouteImport } from './routes/_site/contact'
-import { Route as SiteClimateRiskRouteImport } from './routes/_site/climate-risk'
-import { Route as SiteCbamCheckerRouteImport } from './routes/_site/cbam-checker'
-import { Route as SiteAboutRouteImport } from './routes/_site/about'
-import { Route as AuthenticatedWaterAccountingRouteImport } from './routes/_authenticated/water-accounting'
-import { Route as AuthenticatedReportsRouteImport } from './routes/_authenticated/reports'
-import { Route as AuthenticatedJointVenturesRouteImport } from './routes/_authenticated/joint-ventures'
-import { Route as AuthenticatedHistoryRouteImport } from './routes/_authenticated/history'
-import { Route as AuthenticatedGwpOdpRouteImport } from './routes/_authenticated/gwp-odp'
-import { Route as AuthenticatedDecarbonizationRouteImport } from './routes/_authenticated/decarbonization'
-import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
-import { Route as AuthenticatedCctsRouteImport } from './routes/_authenticated/ccts'
-import { Route as AuthenticatedCbamRouteImport } from './routes/_authenticated/cbam'
-import { Route as AuthenticatedCalculatorRouteImport } from './routes/_authenticated/calculator'
-import { Route as AuthenticatedBrsrRouteImport } from './routes/_authenticated/brsr'
+import { Route as SiteRouteRouteImport } from './routes/_site/route'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedBrsrRouteImport } from './routes/_authenticated/brsr'
+import { Route as AuthenticatedCalculatorRouteImport } from './routes/_authenticated/calculator'
+import { Route as AuthenticatedCbamRouteImport } from './routes/_authenticated/cbam'
+import { Route as AuthenticatedCctsRouteImport } from './routes/_authenticated/ccts'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedDecarbonizationRouteImport } from './routes/_authenticated/decarbonization'
+import { Route as AuthenticatedGwpOdpRouteImport } from './routes/_authenticated/gwp-odp'
+import { Route as AuthenticatedHistoryRouteImport } from './routes/_authenticated/history'
+import { Route as AuthenticatedJointVenturesRouteImport } from './routes/_authenticated/joint-ventures'
+import { Route as AuthenticatedReportsRouteImport } from './routes/_authenticated/reports'
+import { Route as AuthenticatedWaterAccountingRouteImport } from './routes/_authenticated/water-accounting'
+import { Route as SiteIndexRouteImport } from './routes/_site/index'
+import { Route as SiteAboutRouteImport } from './routes/_site/about'
+import { Route as SiteCbamCheckerRouteImport } from './routes/_site/cbam-checker'
+import { Route as SiteClimateRiskRouteImport } from './routes/_site/climate-risk'
+import { Route as SiteContactRouteImport } from './routes/_site/contact'
+import { Route as SiteInsightsRouteImport } from './routes/_site/insights'
+import { Route as SitePlatformRouteImport } from './routes/_site/platform'
+import { Route as SiteResourcesRouteImport } from './routes/_site/resources'
+import { Route as SiteServicesRouteImport } from './routes/_site/services'
 
-const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SiteRouteRoute = SiteRouteRouteImport.update({
   id: '/_site',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
-  id: '/_authenticated',
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SiteIndexRoute = SiteIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => SiteRouteRoute,
-} as any)
-const SiteServicesRoute = SiteServicesRouteImport.update({
-  id: '/services',
-  path: '/services',
-  getParentRoute: () => SiteRouteRoute,
-} as any)
-const SiteResourcesRoute = SiteResourcesRouteImport.update({
-  id: '/resources',
-  path: '/resources',
-  getParentRoute: () => SiteRouteRoute,
-} as any)
-const SitePlatformRoute = SitePlatformRouteImport.update({
-  id: '/platform',
-  path: '/platform',
-  getParentRoute: () => SiteRouteRoute,
-} as any)
-const SiteInsightsRoute = SiteInsightsRouteImport.update({
-  id: '/insights',
-  path: '/insights',
-  getParentRoute: () => SiteRouteRoute,
-} as any)
-const SiteContactRoute = SiteContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
-  getParentRoute: () => SiteRouteRoute,
-} as any)
-const SiteClimateRiskRoute = SiteClimateRiskRouteImport.update({
-  id: '/climate-risk',
-  path: '/climate-risk',
-  getParentRoute: () => SiteRouteRoute,
-} as any)
-const SiteCbamCheckerRoute = SiteCbamCheckerRouteImport.update({
-  id: '/cbam-checker',
-  path: '/cbam-checker',
-  getParentRoute: () => SiteRouteRoute,
-} as any)
-const SiteAboutRoute = SiteAboutRouteImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => SiteRouteRoute,
-} as any)
-const AuthenticatedWaterAccountingRoute =
-  AuthenticatedWaterAccountingRouteImport.update({
-    id: '/water-accounting',
-    path: '/water-accounting',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedReportsRoute = AuthenticatedReportsRouteImport.update({
-  id: '/reports',
-  path: '/reports',
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedJointVenturesRoute =
-  AuthenticatedJointVenturesRouteImport.update({
-    id: '/joint-ventures',
-    path: '/joint-ventures',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedHistoryRoute = AuthenticatedHistoryRouteImport.update({
-  id: '/history',
-  path: '/history',
+const AuthenticatedBrsrRoute = AuthenticatedBrsrRouteImport.update({
+  id: '/brsr',
+  path: '/brsr',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedGwpOdpRoute = AuthenticatedGwpOdpRouteImport.update({
-  id: '/gwp-odp',
-  path: '/gwp-odp',
+const AuthenticatedCalculatorRoute = AuthenticatedCalculatorRouteImport.update({
+  id: '/calculator',
+  path: '/calculator',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedCbamRoute = AuthenticatedCbamRouteImport.update({
+  id: '/cbam',
+  path: '/cbam',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedCctsRoute = AuthenticatedCctsRouteImport.update({
+  id: '/ccts',
+  path: '/ccts',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedDecarbonizationRoute =
@@ -125,35 +83,77 @@ const AuthenticatedDecarbonizationRoute =
     path: '/decarbonization',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
+const AuthenticatedGwpOdpRoute = AuthenticatedGwpOdpRouteImport.update({
+  id: '/gwp-odp',
+  path: '/gwp-odp',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedCctsRoute = AuthenticatedCctsRouteImport.update({
-  id: '/ccts',
-  path: '/ccts',
+const AuthenticatedHistoryRoute = AuthenticatedHistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedCbamRoute = AuthenticatedCbamRouteImport.update({
-  id: '/cbam',
-  path: '/cbam',
+const AuthenticatedJointVenturesRoute =
+  AuthenticatedJointVenturesRouteImport.update({
+    id: '/joint-ventures',
+    path: '/joint-ventures',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedReportsRoute = AuthenticatedReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedCalculatorRoute = AuthenticatedCalculatorRouteImport.update({
-  id: '/calculator',
-  path: '/calculator',
-  getParentRoute: () => AuthenticatedRouteRoute,
+const AuthenticatedWaterAccountingRoute =
+  AuthenticatedWaterAccountingRouteImport.update({
+    id: '/water-accounting',
+    path: '/water-accounting',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const SiteIndexRoute = SiteIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SiteRouteRoute,
 } as any)
-const AuthenticatedBrsrRoute = AuthenticatedBrsrRouteImport.update({
-  id: '/brsr',
-  path: '/brsr',
-  getParentRoute: () => AuthenticatedRouteRoute,
+const SiteAboutRoute = SiteAboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => SiteRouteRoute,
 } as any)
-const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
-  getParentRoute: () => AuthenticatedRouteRoute,
+const SiteCbamCheckerRoute = SiteCbamCheckerRouteImport.update({
+  id: '/cbam-checker',
+  path: '/cbam-checker',
+  getParentRoute: () => SiteRouteRoute,
+} as any)
+const SiteClimateRiskRoute = SiteClimateRiskRouteImport.update({
+  id: '/climate-risk',
+  path: '/climate-risk',
+  getParentRoute: () => SiteRouteRoute,
+} as any)
+const SiteContactRoute = SiteContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => SiteRouteRoute,
+} as any)
+const SiteInsightsRoute = SiteInsightsRouteImport.update({
+  id: '/insights',
+  path: '/insights',
+  getParentRoute: () => SiteRouteRoute,
+} as any)
+const SitePlatformRoute = SitePlatformRouteImport.update({
+  id: '/platform',
+  path: '/platform',
+  getParentRoute: () => SiteRouteRoute,
+} as any)
+const SiteResourcesRoute = SiteResourcesRouteImport.update({
+  id: '/resources',
+  path: '/resources',
+  getParentRoute: () => SiteRouteRoute,
+} as any)
+const SiteServicesRoute = SiteServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => SiteRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -316,11 +316,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_site': {
@@ -330,144 +330,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated': {
-      id: '/_authenticated'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_site/': {
-      id: '/_site/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof SiteIndexRouteImport
-      parentRoute: typeof SiteRouteRoute
-    }
-    '/_site/services': {
-      id: '/_site/services'
-      path: '/services'
-      fullPath: '/services'
-      preLoaderRoute: typeof SiteServicesRouteImport
-      parentRoute: typeof SiteRouteRoute
-    }
-    '/_site/resources': {
-      id: '/_site/resources'
-      path: '/resources'
-      fullPath: '/resources'
-      preLoaderRoute: typeof SiteResourcesRouteImport
-      parentRoute: typeof SiteRouteRoute
-    }
-    '/_site/platform': {
-      id: '/_site/platform'
-      path: '/platform'
-      fullPath: '/platform'
-      preLoaderRoute: typeof SitePlatformRouteImport
-      parentRoute: typeof SiteRouteRoute
-    }
-    '/_site/insights': {
-      id: '/_site/insights'
-      path: '/insights'
-      fullPath: '/insights'
-      preLoaderRoute: typeof SiteInsightsRouteImport
-      parentRoute: typeof SiteRouteRoute
-    }
-    '/_site/contact': {
-      id: '/_site/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof SiteContactRouteImport
-      parentRoute: typeof SiteRouteRoute
-    }
-    '/_site/climate-risk': {
-      id: '/_site/climate-risk'
-      path: '/climate-risk'
-      fullPath: '/climate-risk'
-      preLoaderRoute: typeof SiteClimateRiskRouteImport
-      parentRoute: typeof SiteRouteRoute
-    }
-    '/_site/cbam-checker': {
-      id: '/_site/cbam-checker'
-      path: '/cbam-checker'
-      fullPath: '/cbam-checker'
-      preLoaderRoute: typeof SiteCbamCheckerRouteImport
-      parentRoute: typeof SiteRouteRoute
-    }
-    '/_site/about': {
-      id: '/_site/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof SiteAboutRouteImport
-      parentRoute: typeof SiteRouteRoute
-    }
-    '/_authenticated/water-accounting': {
-      id: '/_authenticated/water-accounting'
-      path: '/water-accounting'
-      fullPath: '/water-accounting'
-      preLoaderRoute: typeof AuthenticatedWaterAccountingRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/reports': {
-      id: '/_authenticated/reports'
-      path: '/reports'
-      fullPath: '/reports'
-      preLoaderRoute: typeof AuthenticatedReportsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/joint-ventures': {
-      id: '/_authenticated/joint-ventures'
-      path: '/joint-ventures'
-      fullPath: '/joint-ventures'
-      preLoaderRoute: typeof AuthenticatedJointVenturesRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/history': {
-      id: '/_authenticated/history'
-      path: '/history'
-      fullPath: '/history'
-      preLoaderRoute: typeof AuthenticatedHistoryRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/gwp-odp': {
-      id: '/_authenticated/gwp-odp'
-      path: '/gwp-odp'
-      fullPath: '/gwp-odp'
-      preLoaderRoute: typeof AuthenticatedGwpOdpRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/decarbonization': {
-      id: '/_authenticated/decarbonization'
-      path: '/decarbonization'
-      fullPath: '/decarbonization'
-      preLoaderRoute: typeof AuthenticatedDecarbonizationRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/dashboard': {
-      id: '/_authenticated/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/ccts': {
-      id: '/_authenticated/ccts'
-      path: '/ccts'
-      fullPath: '/ccts'
-      preLoaderRoute: typeof AuthenticatedCctsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/cbam': {
-      id: '/_authenticated/cbam'
-      path: '/cbam'
-      fullPath: '/cbam'
-      preLoaderRoute: typeof AuthenticatedCbamRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/calculator': {
-      id: '/_authenticated/calculator'
-      path: '/calculator'
-      fullPath: '/calculator'
-      preLoaderRoute: typeof AuthenticatedCalculatorRouteImport
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/brsr': {
@@ -477,12 +351,138 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedBrsrRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/admin': {
-      id: '/_authenticated/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+    '/_authenticated/calculator': {
+      id: '/_authenticated/calculator'
+      path: '/calculator'
+      fullPath: '/calculator'
+      preLoaderRoute: typeof AuthenticatedCalculatorRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/cbam': {
+      id: '/_authenticated/cbam'
+      path: '/cbam'
+      fullPath: '/cbam'
+      preLoaderRoute: typeof AuthenticatedCbamRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/ccts': {
+      id: '/_authenticated/ccts'
+      path: '/ccts'
+      fullPath: '/ccts'
+      preLoaderRoute: typeof AuthenticatedCctsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/decarbonization': {
+      id: '/_authenticated/decarbonization'
+      path: '/decarbonization'
+      fullPath: '/decarbonization'
+      preLoaderRoute: typeof AuthenticatedDecarbonizationRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/gwp-odp': {
+      id: '/_authenticated/gwp-odp'
+      path: '/gwp-odp'
+      fullPath: '/gwp-odp'
+      preLoaderRoute: typeof AuthenticatedGwpOdpRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/history': {
+      id: '/_authenticated/history'
+      path: '/history'
+      fullPath: '/history'
+      preLoaderRoute: typeof AuthenticatedHistoryRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/joint-ventures': {
+      id: '/_authenticated/joint-ventures'
+      path: '/joint-ventures'
+      fullPath: '/joint-ventures'
+      preLoaderRoute: typeof AuthenticatedJointVenturesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/reports': {
+      id: '/_authenticated/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof AuthenticatedReportsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/water-accounting': {
+      id: '/_authenticated/water-accounting'
+      path: '/water-accounting'
+      fullPath: '/water-accounting'
+      preLoaderRoute: typeof AuthenticatedWaterAccountingRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_site/': {
+      id: '/_site/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof SiteIndexRouteImport
+      parentRoute: typeof SiteRouteRoute
+    }
+    '/_site/about': {
+      id: '/_site/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof SiteAboutRouteImport
+      parentRoute: typeof SiteRouteRoute
+    }
+    '/_site/cbam-checker': {
+      id: '/_site/cbam-checker'
+      path: '/cbam-checker'
+      fullPath: '/cbam-checker'
+      preLoaderRoute: typeof SiteCbamCheckerRouteImport
+      parentRoute: typeof SiteRouteRoute
+    }
+    '/_site/climate-risk': {
+      id: '/_site/climate-risk'
+      path: '/climate-risk'
+      fullPath: '/climate-risk'
+      preLoaderRoute: typeof SiteClimateRiskRouteImport
+      parentRoute: typeof SiteRouteRoute
+    }
+    '/_site/contact': {
+      id: '/_site/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof SiteContactRouteImport
+      parentRoute: typeof SiteRouteRoute
+    }
+    '/_site/insights': {
+      id: '/_site/insights'
+      path: '/insights'
+      fullPath: '/insights'
+      preLoaderRoute: typeof SiteInsightsRouteImport
+      parentRoute: typeof SiteRouteRoute
+    }
+    '/_site/platform': {
+      id: '/_site/platform'
+      path: '/platform'
+      fullPath: '/platform'
+      preLoaderRoute: typeof SitePlatformRouteImport
+      parentRoute: typeof SiteRouteRoute
+    }
+    '/_site/resources': {
+      id: '/_site/resources'
+      path: '/resources'
+      fullPath: '/resources'
+      preLoaderRoute: typeof SiteResourcesRouteImport
+      parentRoute: typeof SiteRouteRoute
+    }
+    '/_site/services': {
+      id: '/_site/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof SiteServicesRouteImport
+      parentRoute: typeof SiteRouteRoute
     }
   }
 }

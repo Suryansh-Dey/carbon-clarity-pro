@@ -99,7 +99,7 @@ async function checkUserIsAdmin(userId: string, userEmail?: string): Promise<boo
 
 export const saveCalculation = createServerFn({ method: "POST" })
   .middleware([requireAuth])
-  .inputValidator((d: unknown) => SaveSchema.parse(d))
+  .validator((d: unknown) => SaveSchema.parse(d))
   .handler(async ({ data, context }): Promise<CalculationRow> => {
     const { userId } = context;
     try {
@@ -159,7 +159,7 @@ export const listMyCalculations = createServerFn({ method: "GET" })
 
 export const deleteCalculation = createServerFn({ method: "POST" })
   .middleware([requireAuth])
-  .inputValidator((d: unknown) => z.object({ id: z.string() }).parse(d))
+  .validator((d: unknown) => z.object({ id: z.string() }).parse(d))
   .handler(async ({ data, context }) => {
     try {
       const supabase = await getSupabaseAdmin();
@@ -176,7 +176,7 @@ export const deleteCalculation = createServerFn({ method: "POST" })
 
 export const getCalculation = createServerFn({ method: "GET" })
   .middleware([requireAuth])
-  .inputValidator((d: unknown) => z.object({ id: z.string() }).parse(d))
+  .validator((d: unknown) => z.object({ id: z.string() }).parse(d))
   .handler(async ({ data, context }): Promise<CalculationRow> => {
     try {
       const supabase = await getSupabaseAdmin();
@@ -241,7 +241,7 @@ export const getMyProfile = createServerFn({ method: "GET" })
 
 export const updateMyProfile = createServerFn({ method: "POST" })
   .middleware([requireAuth])
-  .inputValidator((d: unknown) =>
+  .validator((d: unknown) =>
     z
       .object({
         full_name: z.string().trim().max(120).optional(),
