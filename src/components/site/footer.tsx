@@ -105,14 +105,14 @@ export function SiteFooter() {
             <span>EU CBAM 2023/956</span>
           </p>
           <p>
-            Earth imagery:{" "}
+            Earth:{" "}
             <a
               href="https://science.nasa.gov/resource/blue-marble-2002/"
               target="_blank"
               rel="noopener noreferrer"
               className="underline decoration-white/20 underline-offset-4 hover:text-white"
             >
-              NASA / Blue Marble
+              Blue Marble
             </a>
           </p>
         </div>

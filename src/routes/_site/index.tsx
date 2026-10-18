@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { AnimatePresence, motion, useScroll, useTransform } from "motion/react";
-import { useRef, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { useState } from "react";
 import {
   BarChart3,
   CloudLightning,
@@ -204,14 +204,8 @@ function Ticker() {
 }
 
 function EarthSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const rotate = useTransform(scrollYProgress, [0, 1], [-25, 25]);
-  const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [35, 0, -20]);
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.7, 1, 0.9]);
-
   return (
-    <section ref={ref} className="relative overflow-hidden py-28 sm:py-36">
+    <section className="relative overflow-hidden py-28 sm:py-36">
       <div className="mx-auto grid max-w-7xl items-center gap-16 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
         <div
           className="relative mx-auto aspect-square w-full max-w-[520px]"
@@ -220,12 +214,12 @@ function EarthSection() {
           <div className="absolute inset-[-12%] rounded-full bg-periwinkle/20 blur-[90px]" />
           <div className="animate-orbit absolute inset-[-6%] rounded-full border border-dashed border-lavender/25" />
           <div className="absolute inset-[-14%] rounded-full border border-white/[0.06]" />
-          <motion.img
+          {/* Slow full turn in the image plane; the shading overlay stays fixed */}
+          <img
             src="/images/earth-nasa.jpg"
-            alt="Earth from space, NASA Blue Marble"
+            alt="Earth from space, Blue Marble"
             loading="lazy"
-            style={{ rotate, rotateX, scale }}
-            className="relative h-full w-full rounded-full object-cover shadow-[0_0_120px_-20px_rgb(115_108_237/0.8)]"
+            className="animate-earth-spin relative h-full w-full rounded-full object-cover shadow-[0_0_120px_-20px_rgb(115_108_237/0.8)]"
           />
           <div className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle_at_30%_25%,transparent_45%,rgb(3_3_6/0.85)_75%)]" />
         </div>
@@ -240,14 +234,7 @@ function EarthSection() {
             CliSo / People &amp; Planet
           </p>
           <Note>
-            <a
-              href="https://science.nasa.gov/resource/blue-marble-2002/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline decoration-white/20 underline-offset-4 hover:text-white"
-            >
-              Earth imagery: NASA / Blue Marble
-            </a>
+              Earth: Blue Marble
           </Note>
         </Reveal>
       </div>

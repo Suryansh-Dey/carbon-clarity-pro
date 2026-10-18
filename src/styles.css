@@ -333,6 +333,10 @@
   animation: orbit 40s linear infinite;
 }
 
+@utility animate-earth-spin {
+  animation: orbit 120s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
