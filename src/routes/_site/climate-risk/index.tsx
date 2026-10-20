@@ -2,19 +2,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Activity, ClipboardCheck, Globe2, LineChart } from "lucide-react";
 import { HeroCanvas } from "@/components/site/hero-canvas";
 import { Reveal, Stagger, StaggerItem, Tilt } from "@/components/site/motion";
-import {
-  CtaExternal,
-  CtaLink,
-  Eyebrow,
-  GlassCard,
-  Note,
-  Section,
-  SectionHeading,
-} from "@/components/site/ui";
-import { CLIMATE_RISK_URL } from "@/components/site/content";
+import { CtaLink, Eyebrow, GlassCard, Note, Section, SectionHeading } from "@/components/site/ui";
 import { ContactBand } from "@/components/site/contact-band";
 
-export const Route = createFileRoute("/_site/climate-risk")({
+export const Route = createFileRoute("/_site/climate-risk/")({
   head: () => ({
     meta: [
       { title: "Climate Risk Observatory — CliSo Tech" },
@@ -86,7 +77,7 @@ function ClimateRiskPage() {
           />
           <Reveal className="space-y-4 lg:justify-self-end">
             <div className="flex flex-col gap-3 sm:flex-row">
-              <CtaExternal href={CLIMATE_RISK_URL}>Open Climate Risk Assessment</CtaExternal>
+              <CtaLink to="/climate-risk/observatory">Open Climate Risk Assessment</CtaLink>
               <CtaLink to="/contact" variant="ghost">
                 Discuss a climate risk assessment
               </CtaLink>

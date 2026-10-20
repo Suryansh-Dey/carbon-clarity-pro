@@ -1,12 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "motion/react";
 import { useRef, useState } from "react";
-import { Check, Copy, Cookie, FileText, Lock } from "lucide-react";
+import { Check, Cookie, FileText, Loader2, Lock, Send } from "lucide-react";
 import { Reveal, Stagger, StaggerItem, Tilt } from "@/components/site/motion";
 import { Eyebrow, GlassCard, Note, PageHero, Section, SectionHeading } from "@/components/site/ui";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { sendEnquiry } from "@/lib/contact.functions";
 
 export const Route = createFileRoute("/_site/contact")({
   head: () => ({
@@ -26,7 +27,7 @@ const POLICIES = [
   {
     icon: Lock,
     t: "Privacy policy",
-    d: "This website’s enquiry tool prepares text in your browser and does not submit it to CliSo Tech. Do not enter sensitive personal information. A company-approved privacy policy and contact point will be added before collecting enquiries online.",
+    d: "Enquiries sent through this website are emailed to CliSo Tech and used only to respond to you. Do not enter sensitive personal information. A company-approved privacy policy and contact point will be published separately.",
   },
   {
     icon: FileText,
@@ -77,28 +78,31 @@ function ContactPage() {
 }
 
 function EnquiryForm() {
-  const [prepared, setPrepared] = useState<string | null>(null);
-  const [status, setStatus] = useState("");
-  const outRef = useRef<HTMLTextAreaElement>(null);
+  const [state, setState] = useState<"idle" | "sending" | "sent">("idle");
+  const [error, setError] = useState("");
+  const [sentTo, setSentTo] = useState("");
+  const formRef = useRef<HTMLFormElement>(null);
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const d = new FormData(e.currentTarget);
-    setPrepared(
-      `Enquiry for CliSo Tech Private Limited\n\nName: ${d.get("name")}\nEmail: ${d.get("email")}\n\n${d.get("message")}`,
-    );
-    setStatus("");
-    requestAnimationFrame(() => outRef.current?.focus());
-  }
-
-  async function onCopy() {
-    if (!prepared) return;
+    const payload = {
+      name: String(d.get("name") ?? ""),
+      email: String(d.get("email") ?? ""),
+      message: String(d.get("message") ?? ""),
+      website: String(d.get("website") ?? ""),
+    };
+    setState("sending");
+    setError("");
     try {
-      await navigator.clipboard.writeText(prepared);
-      setStatus("Copied");
-    } catch {
-      outRef.current?.select();
-      setStatus("Select and copy the text above.");
+      const res = await sendEnquiry({ data: payload });
+      if (!res.ok) throw new Error(res.error);
+      setSentTo(payload.email);
+      setState("sent");
+      formRef.current?.reset();
+    } catch (err) {
+      setState("idle");
+      setError(enquiryError(err));
     }
   }
 
@@ -108,15 +112,16 @@ function EnquiryForm() {
         <GlassCard className="h-full p-8 sm:p-10">
           <Eyebrow>Start a conversation</Eyebrow>
           <p className="mt-4 text-muted-foreground">
-            Prepare an enquiry for business, consulting or media discussions.
+            Send an enquiry for business, consulting or media discussions.
           </p>
-          <form onSubmit={onSubmit} className="mt-8 space-y-5">
+          <form ref={formRef} onSubmit={onSubmit} className="mt-8 space-y-5">
             <div className="space-y-2">
               <Label htmlFor="name">Your name</Label>
               <Input
                 id="name"
                 name="name"
                 required
+                maxLength={120}
                 autoComplete="name"
                 className="h-11 bg-white/[0.03]"
               />
@@ -128,64 +133,90 @@ function EnquiryForm() {
                 name="email"
                 type="email"
                 required
+                maxLength={254}
                 autoComplete="email"
                 className="h-11 bg-white/[0.03]"
               />
             </div>
             <div className="space-y-2">
               <Label htmlFor="message">How can we help?</Label>
-              <Textarea id="message" name="message" required rows={5} className="bg-white/[0.03]" />
+              <Textarea
+                id="message"
+                name="message"
+                required
+                minLength={10}
+                maxLength={5000}
+                rows={5}
+                className="bg-white/[0.03]"
+              />
+            </div>
+            {/* Honeypot: visually hidden and skipped by keyboard users */}
+            <div aria-hidden className="absolute -left-[9999px] h-px w-px overflow-hidden">
+              <label>
+                Website
+                <input name="website" tabIndex={-1} autoComplete="off" />
+              </label>
             </div>
             <button
               type="submit"
-              className="inline-flex h-12 w-full items-center justify-center rounded-full bg-periwinkle text-sm font-semibold text-white shadow-[0_12px_40px_-12px_rgb(115_108_237/0.95)] transition-all hover:-translate-y-0.5 hover:bg-[#8580f0]"
+              disabled={state === "sending"}
+              className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-periwinkle text-sm font-semibold text-white shadow-[0_12px_40px_-12px_rgb(115_108_237/0.95)] transition-all hover:-translate-y-0.5 hover:bg-[#8580f0] disabled:cursor-wait disabled:opacity-70 disabled:hover:translate-y-0"
             >
-              Prepare enquiry
+              {state === "sending" ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <Send className="h-4 w-4" />
+              )}
+              {state === "sending" ? "Sending…" : "Send enquiry"}
             </button>
-            <Note>This form prepares an enquiry to copy. It does not send a message.</Note>
+            <p role="alert" className="min-h-5 text-sm text-rose-300">
+              {error}
+            </p>
+            <Note>
+              Your enquiry is emailed to the CliSo Tech team. Do not include sensitive personal
+              information.
+            </Note>
           </form>
         </GlassCard>
       </Reveal>
 
       <div style={{ perspective: 1400 }}>
         <AnimatePresence mode="wait">
-          {prepared ? (
+          {state === "sent" ? (
             <motion.div
-              key="out"
+              key="sent"
               initial={{ opacity: 0, rotateY: -40, x: 40 }}
               animate={{ opacity: 1, rotateY: 0, x: 0 }}
               exit={{ opacity: 0, rotateY: 30 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               className="h-full"
             >
-              <GlassCard className="flex h-full flex-col p-8 sm:p-10">
-                <Label htmlFor="prepared" className="mb-3">
-                  Your enquiry
-                </Label>
-                <Textarea
-                  id="prepared"
-                  ref={outRef}
-                  readOnly
-                  value={prepared}
-                  className="min-h-[260px] flex-1 bg-white/[0.03] font-mono text-sm"
-                />
-                <div className="mt-5 flex items-center gap-4">
-                  <button
-                    type="button"
-                    onClick={onCopy}
-                    className="inline-flex h-11 items-center gap-2 rounded-full border border-white/15 px-6 text-sm font-semibold text-white hover:border-lavender/60 hover:bg-white/[0.05]"
-                  >
-                    {status === "Copied" ? (
-                      <Check className="h-4 w-4" />
-                    ) : (
-                      <Copy className="h-4 w-4" />
-                    )}
-                    Copy enquiry
-                  </button>
-                  <span role="status" className="text-sm text-lavender">
-                    {status}
-                  </span>
-                </div>
+              <GlassCard
+                role="status"
+                className="relative flex h-full min-h-[320px] flex-col items-center justify-center overflow-hidden p-10 text-center"
+              >
+                <div className="pointer-events-none absolute h-72 w-72 rounded-full bg-periwinkle/20 blur-[90px]" />
+                <motion.span
+                  initial={{ scale: 0, rotate: -90 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ type: "spring", stiffness: 260, damping: 18, delay: 0.2 }}
+                  className="relative mb-6 grid h-20 w-20 place-items-center rounded-full bg-gradient-to-br from-periwinkle to-indigo-cosmic shadow-[0_0_60px_-10px_rgb(115_108_237/0.9)]"
+                >
+                  <Check className="h-9 w-9 text-white" />
+                </motion.span>
+                <p className="relative font-display text-3xl text-white">
+                  Thank you — enquiry sent.
+                </p>
+                <p className="relative mt-3 max-w-sm text-sm text-muted-foreground">
+                  The CliSo Tech team will reply to <span className="text-lavender">{sentTo}</span>.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setState("idle")}
+                  className="relative mt-6 inline-flex h-11 items-center gap-2 rounded-full border border-white/15 px-6 text-sm font-semibold text-white hover:border-lavender/60 hover:bg-white/[0.05]"
+                >
+                  Send another enquiry
+                </button>
               </GlassCard>
             </motion.div>
           ) : (
@@ -198,12 +229,14 @@ function EnquiryForm() {
             >
               <div className="relative flex h-full min-h-[320px] flex-col items-center justify-center overflow-hidden rounded-3xl border border-dashed border-white/10 p-10 text-center">
                 <div className="pointer-events-none absolute h-72 w-72 rounded-full bg-periwinkle/15 blur-[90px]" />
-                <div className="relative mb-6 h-24 w-24 animate-float rounded-full border border-lavender/30 bg-gradient-to-br from-periwinkle/40 to-indigo-cosmic shadow-[0_0_60px_-10px_rgb(115_108_237/0.9)]" />
+                <div
+                  className={`relative mb-6 h-24 w-24 rounded-full border border-lavender/30 bg-gradient-to-br from-periwinkle/40 to-indigo-cosmic shadow-[0_0_60px_-10px_rgb(115_108_237/0.9)] ${state === "sending" ? "animate-pulse" : "animate-float"}`}
+                />
                 <p className="relative font-display text-2xl text-white">
-                  Your enquiry appears here
+                  {state === "sending" ? "Sending your enquiry…" : "We’ll reply by email"}
                 </p>
                 <p className="relative mt-2 max-w-sm text-sm text-muted-foreground">
-                  Fill in the form and we’ll prepare a message you can copy into your email client.
+                  Fill in the form and your message goes straight to the CliSo Tech team.
                 </p>
               </div>
             </motion.div>
@@ -212,4 +245,16 @@ function EnquiryForm() {
       </div>
     </div>
   );
+}
+
+/** Readable message from a server validation (zod) or delivery error. */
+function enquiryError(err: unknown) {
+  const msg = err instanceof Error ? err.message : "";
+  try {
+    const issues = JSON.parse(msg) as { message?: string }[];
+    if (Array.isArray(issues) && issues[0]?.message) return issues[0].message;
+  } catch {
+    /* not a zod payload */
+  }
+  return msg || "We couldn’t send your enquiry right now. Please try again shortly.";
 }

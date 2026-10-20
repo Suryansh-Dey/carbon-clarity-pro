@@ -1,9 +1,6 @@
 import type { LinkProps } from "@tanstack/react-router";
 
-/** Pages hosted on the original CliSo website that are not part of this app. */
-const REF = "https://cliso-tech.masgptp.chatgpt.site";
-export const SMART_DECARB_URL = '/platform';
-export const CLIMATE_RISK_URL = `${REF}/climate-risk/`;
+export const SMART_DECARB_URL = "/platform";
 export const GLOBAL_RISK_URL = "https://www.weforum.org/publications/global-risks-report-2026";
 
 export type Product = {

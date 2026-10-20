@@ -24,11 +24,11 @@ type Founder = {
   role: string;
   meta: string;
   photo: string;
-  tagline: string;
+  tagline?: string;
   bio: ReactNode[];
-  listTitle: string;
+  listTitle?: string;
   intro?: string;
-  list: [string, string][];
+  list?: [string, string][];
   education: string[];
 };
 
@@ -109,8 +109,25 @@ const FOUNDERS: Founder[] = [
   },
 ];
 
+const TEAM_PROFILES: Founder[] = [
+  {
+    name: "Kabir Talade",
+    role: "Software Developer Consultant",
+    meta: "Software engineering · AI · Automation",
+    photo: "/images/kabir.jpeg",
+    bio: [
+      "Kabir Talade is a software developer and technology entrepreneur pursuing a B.Tech in Computer Science and Engineering at Birla Institute of Technology (BIT), Mesra. He works at the intersection of software engineering, artificial intelligence, automation, and technology-driven business solutions.",
+      "At Clisomumbai, Kabir contributes to developing AI-powered climate and ESG solutions that help businesses automate greenhouse gas accounting, streamline sustainability reporting, analyze environmental data, and progress toward their Net Zero goals.",
+      "As the founder of Explorify Trips Private Limited, he brings an entrepreneurial mindset and a product-focused approach to building scalable digital platforms. His interests include AI-driven automation, full-stack development, intelligent data processing, and building technology that solves real-world business challenges.",
+    ],
+    education: [
+      "Pursuing Bachelor of Technology, Computer Science Engineering",
+      "Birla Institute of Technology, Mesra",
+    ],
+  },
+];
+
 const TEAM = [
-  { initials: "KT", name: "Kabirr Talade", role: "Senior Digital Sustainability Expert" },
   { initials: "AS", name: "Abhinav Sohani", role: "Advisor, Digital Sustainability Program" },
 ];
 
@@ -182,7 +199,12 @@ function AboutPage() {
 
       <Section id="team" className="pt-0 sm:pt-0">
         <SectionHeading eyebrow="Our team & advisors" title="Digital sustainability expertise." />
-        <Stagger className="mt-12 grid gap-5 sm:grid-cols-2">
+        <div className="mt-12 space-y-10">
+          {TEAM_PROFILES.map((p) => (
+            <FounderCard key={p.name} founder={p} flip={false} />
+          ))}
+        </div>
+        <Stagger className="mt-10 grid gap-5 sm:grid-cols-2">
           {TEAM.map((m) => (
             <StaggerItem key={m.name}>
               <Tilt className="rounded-3xl">
@@ -242,9 +264,11 @@ function FounderCard({ founder: f, flip }: { founder: Founder; flip: boolean }) 
         </div>
 
         <div className={`space-y-6 ${flip ? "lg:order-1" : ""}`}>
-          <p className="font-display text-2xl italic leading-snug text-white sm:text-3xl">
-            {f.tagline}
-          </p>
+          {f.tagline && (
+            <p className="font-display text-2xl italic leading-snug text-white sm:text-3xl">
+              {f.tagline}
+            </p>
+          )}
           <div className="space-y-4 text-muted-foreground">
             {f.bio.map((p, i) => (
               <p key={i} className="leading-relaxed">
@@ -252,20 +276,22 @@ function FounderCard({ founder: f, flip }: { founder: Founder; flip: boolean }) 
               </p>
             ))}
           </div>
-          <div className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6">
-            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-lavender">
-              {f.listTitle}
-            </p>
-            {f.intro && <p className="mb-4 text-sm text-muted-foreground">{f.intro}</p>}
-            <ul className="grid gap-4 sm:grid-cols-2">
-              {f.list.map(([k, v]) => (
-                <li key={k} className="text-sm leading-relaxed text-muted-foreground">
-                  <strong className="block font-semibold text-white">{k}</strong>
-                  {v}
-                </li>
-              ))}
-            </ul>
-          </div>
+          {f.list && (
+            <div className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6">
+              <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-lavender">
+                {f.listTitle}
+              </p>
+              {f.intro && <p className="mb-4 text-sm text-muted-foreground">{f.intro}</p>}
+              <ul className="grid gap-4 sm:grid-cols-2">
+                {f.list.map(([k, v]) => (
+                  <li key={k} className="text-sm leading-relaxed text-muted-foreground">
+                    <strong className="block font-semibold text-white">{k}</strong>
+                    {v}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </GlassCard>
     </Reveal>

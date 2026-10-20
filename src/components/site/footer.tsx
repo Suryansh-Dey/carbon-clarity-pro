@@ -22,7 +22,7 @@ const COLUMNS: { title: string; links: FooterLink[] }[] = [
       { label: "EU CBAM Exposure Screener", to: "/cbam-checker" },
       { label: "ESG Liability Estimator", to: "/platform", hash: "estimator" },
       { label: "Pricing", to: "/platform", hash: "pricing" },
-      { label: "Climate Risk Observatory", to: "/climate-risk" },
+      { label: "Climate Risk Observatory", to: "/climate-risk/observatory" },
     ],
   },
   {

@@ -103,7 +103,7 @@ const NAV: NavItem[] = [
           {
             label: "Climate Risk Observatory",
             desc: "Event evidence and scenario planning",
-            to: "/climate-risk",
+            to: "/climate-risk/observatory",
             icon: CloudLightning,
           },
         ],
@@ -235,7 +235,7 @@ export function SiteHeader() {
         <nav className="hidden items-center gap-1 lg:flex">
           {NAV.map((item) => {
             if (!item.menu) {
-              const active = pathname === item.to;
+              const active = pathname === item.to || pathname.startsWith(`${item.to}/`);
               return (
                 <Link
                   key={item.label}

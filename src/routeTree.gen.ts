@@ -27,12 +27,13 @@ import { Route as AuthenticatedWaterAccountingRouteImport } from './routes/_auth
 import { Route as SiteIndexRouteImport } from './routes/_site/index'
 import { Route as SiteAboutRouteImport } from './routes/_site/about'
 import { Route as SiteCbamCheckerRouteImport } from './routes/_site/cbam-checker'
-import { Route as SiteClimateRiskRouteImport } from './routes/_site/climate-risk'
 import { Route as SiteContactRouteImport } from './routes/_site/contact'
 import { Route as SiteInsightsRouteImport } from './routes/_site/insights'
 import { Route as SitePlatformRouteImport } from './routes/_site/platform'
 import { Route as SiteResourcesRouteImport } from './routes/_site/resources'
 import { Route as SiteServicesRouteImport } from './routes/_site/services'
+import { Route as SiteClimateRiskIndexRouteImport } from './routes/_site/climate-risk/index'
+import { Route as SiteClimateRiskObservatoryRouteImport } from './routes/_site/climate-risk/observatory'
 
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
@@ -125,11 +126,6 @@ const SiteCbamCheckerRoute = SiteCbamCheckerRouteImport.update({
   path: '/cbam-checker',
   getParentRoute: () => SiteRouteRoute,
 } as any)
-const SiteClimateRiskRoute = SiteClimateRiskRouteImport.update({
-  id: '/climate-risk',
-  path: '/climate-risk',
-  getParentRoute: () => SiteRouteRoute,
-} as any)
 const SiteContactRoute = SiteContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -155,6 +151,17 @@ const SiteServicesRoute = SiteServicesRouteImport.update({
   path: '/services',
   getParentRoute: () => SiteRouteRoute,
 } as any)
+const SiteClimateRiskIndexRoute = SiteClimateRiskIndexRouteImport.update({
+  id: '/climate-risk/',
+  path: '/climate-risk/',
+  getParentRoute: () => SiteRouteRoute,
+} as any)
+const SiteClimateRiskObservatoryRoute =
+  SiteClimateRiskObservatoryRouteImport.update({
+    id: '/climate-risk/observatory',
+    path: '/climate-risk/observatory',
+    getParentRoute: () => SiteRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof SiteIndexRoute
@@ -173,12 +180,13 @@ export interface FileRoutesByFullPath {
   '/water-accounting': typeof AuthenticatedWaterAccountingRoute
   '/about': typeof SiteAboutRoute
   '/cbam-checker': typeof SiteCbamCheckerRoute
-  '/climate-risk': typeof SiteClimateRiskRoute
   '/contact': typeof SiteContactRoute
   '/insights': typeof SiteInsightsRoute
   '/platform': typeof SitePlatformRoute
   '/resources': typeof SiteResourcesRoute
   '/services': typeof SiteServicesRoute
+  '/climate-risk/observatory': typeof SiteClimateRiskObservatoryRoute
+  '/climate-risk/': typeof SiteClimateRiskIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof SiteIndexRoute
@@ -197,12 +205,13 @@ export interface FileRoutesByTo {
   '/water-accounting': typeof AuthenticatedWaterAccountingRoute
   '/about': typeof SiteAboutRoute
   '/cbam-checker': typeof SiteCbamCheckerRoute
-  '/climate-risk': typeof SiteClimateRiskRoute
   '/contact': typeof SiteContactRoute
   '/insights': typeof SiteInsightsRoute
   '/platform': typeof SitePlatformRoute
   '/resources': typeof SiteResourcesRoute
   '/services': typeof SiteServicesRoute
+  '/climate-risk/observatory': typeof SiteClimateRiskObservatoryRoute
+  '/climate-risk': typeof SiteClimateRiskIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -223,13 +232,14 @@ export interface FileRoutesById {
   '/_authenticated/water-accounting': typeof AuthenticatedWaterAccountingRoute
   '/_site/about': typeof SiteAboutRoute
   '/_site/cbam-checker': typeof SiteCbamCheckerRoute
-  '/_site/climate-risk': typeof SiteClimateRiskRoute
   '/_site/contact': typeof SiteContactRoute
   '/_site/insights': typeof SiteInsightsRoute
   '/_site/platform': typeof SitePlatformRoute
   '/_site/resources': typeof SiteResourcesRoute
   '/_site/services': typeof SiteServicesRoute
   '/_site/': typeof SiteIndexRoute
+  '/_site/climate-risk/observatory': typeof SiteClimateRiskObservatoryRoute
+  '/_site/climate-risk/': typeof SiteClimateRiskIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -250,12 +260,13 @@ export interface FileRouteTypes {
     | '/water-accounting'
     | '/about'
     | '/cbam-checker'
-    | '/climate-risk'
     | '/contact'
     | '/insights'
     | '/platform'
     | '/resources'
     | '/services'
+    | '/climate-risk/observatory'
+    | '/climate-risk/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -274,12 +285,13 @@ export interface FileRouteTypes {
     | '/water-accounting'
     | '/about'
     | '/cbam-checker'
-    | '/climate-risk'
     | '/contact'
     | '/insights'
     | '/platform'
     | '/resources'
     | '/services'
+    | '/climate-risk/observatory'
+    | '/climate-risk'
   id:
     | '__root__'
     | '/_authenticated'
@@ -299,13 +311,14 @@ export interface FileRouteTypes {
     | '/_authenticated/water-accounting'
     | '/_site/about'
     | '/_site/cbam-checker'
-    | '/_site/climate-risk'
     | '/_site/contact'
     | '/_site/insights'
     | '/_site/platform'
     | '/_site/resources'
     | '/_site/services'
     | '/_site/'
+    | '/_site/climate-risk/observatory'
+    | '/_site/climate-risk/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -442,13 +455,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteCbamCheckerRouteImport
       parentRoute: typeof SiteRouteRoute
     }
-    '/_site/climate-risk': {
-      id: '/_site/climate-risk'
-      path: '/climate-risk'
-      fullPath: '/climate-risk'
-      preLoaderRoute: typeof SiteClimateRiskRouteImport
-      parentRoute: typeof SiteRouteRoute
-    }
     '/_site/contact': {
       id: '/_site/contact'
       path: '/contact'
@@ -482,6 +488,20 @@ declare module '@tanstack/react-router' {
       path: '/services'
       fullPath: '/services'
       preLoaderRoute: typeof SiteServicesRouteImport
+      parentRoute: typeof SiteRouteRoute
+    }
+    '/_site/climate-risk/': {
+      id: '/_site/climate-risk/'
+      path: '/climate-risk'
+      fullPath: '/climate-risk/'
+      preLoaderRoute: typeof SiteClimateRiskIndexRouteImport
+      parentRoute: typeof SiteRouteRoute
+    }
+    '/_site/climate-risk/observatory': {
+      id: '/_site/climate-risk/observatory'
+      path: '/climate-risk/observatory'
+      fullPath: '/climate-risk/observatory'
+      preLoaderRoute: typeof SiteClimateRiskObservatoryRouteImport
       parentRoute: typeof SiteRouteRoute
     }
   }
@@ -523,25 +543,27 @@ const AuthenticatedRouteRouteWithChildren =
 interface SiteRouteRouteChildren {
   SiteAboutRoute: typeof SiteAboutRoute
   SiteCbamCheckerRoute: typeof SiteCbamCheckerRoute
-  SiteClimateRiskRoute: typeof SiteClimateRiskRoute
   SiteContactRoute: typeof SiteContactRoute
   SiteInsightsRoute: typeof SiteInsightsRoute
   SitePlatformRoute: typeof SitePlatformRoute
   SiteResourcesRoute: typeof SiteResourcesRoute
   SiteServicesRoute: typeof SiteServicesRoute
   SiteIndexRoute: typeof SiteIndexRoute
+  SiteClimateRiskObservatoryRoute: typeof SiteClimateRiskObservatoryRoute
+  SiteClimateRiskIndexRoute: typeof SiteClimateRiskIndexRoute
 }
 
 const SiteRouteRouteChildren: SiteRouteRouteChildren = {
   SiteAboutRoute: SiteAboutRoute,
   SiteCbamCheckerRoute: SiteCbamCheckerRoute,
-  SiteClimateRiskRoute: SiteClimateRiskRoute,
   SiteContactRoute: SiteContactRoute,
   SiteInsightsRoute: SiteInsightsRoute,
   SitePlatformRoute: SitePlatformRoute,
   SiteResourcesRoute: SiteResourcesRoute,
   SiteServicesRoute: SiteServicesRoute,
   SiteIndexRoute: SiteIndexRoute,
+  SiteClimateRiskObservatoryRoute: SiteClimateRiskObservatoryRoute,
+  SiteClimateRiskIndexRoute: SiteClimateRiskIndexRoute,
 }
 
 const SiteRouteRouteWithChildren = SiteRouteRoute._addFileChildren(
