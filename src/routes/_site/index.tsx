@@ -308,7 +308,7 @@ function PlatformTeaser() {
       <div className="grid items-center gap-16 lg:grid-cols-2">
         <SectionHeading
           eyebrow="Featured digital tool / Climate Social Mumbai"
-          title="Carbon & resource intelligence."
+          title="Carbon & Social intelligence."
           accent="One connected platform."
         >
           <p className="text-lg leading-relaxed text-muted-foreground">

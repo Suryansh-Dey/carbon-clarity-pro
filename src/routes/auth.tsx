@@ -49,7 +49,7 @@ function AuthPage() {
         <div className="relative max-w-md space-y-4">
           <Eyebrow>Featured digital tool</Eyebrow>
           <p className="font-display text-5xl leading-tight text-white">
-            Carbon & resource intelligence.
+            Carbon & social intelligence.
             <br />
             <span className="text-gradient italic">One connected platform.</span>
           </p>

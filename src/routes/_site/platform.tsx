@@ -70,13 +70,13 @@ import { SMART_DECARB_URL } from "@/components/site/content";
 export const Route = createFileRoute("/_site/platform")({
   head: () => ({
     meta: [
-      { title: "clisomumbai platform — Carbon & Resource Intelligence | CliSo Tech" },
+      { title: "clisomumbai platform — Carbon & Social Intelligence | CliSo Tech" },
       {
         name: "description",
         content:
           "Audit-defensible Scope 1-3 GHG calculations, SEBI BRSR Core Principle 6, EU CBAM DG TAXUD XML exports, and GRI 303 Water Stewardship for Indian industrial enterprises.",
       },
-      { property: "og:title", content: "clisomumbai — Enterprise Carbon & Resource Intelligence" },
+      { property: "og:title", content: "clisomumbai — Enterprise Carbon & Social Intelligence" },
       {
         property: "og:description",
         content:
@@ -162,7 +162,7 @@ function PlatformPage() {
     <>
       <PageHero
         eyebrow="Featured digital tool / Climate Social Mumbai"
-        title="Carbon & resource intelligence."
+        title="Carbon & Social intelligence."
         accent="One connected platform."
         description={
           <>
