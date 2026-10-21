@@ -1,6 +1,8 @@
 import type { LinkProps } from "@tanstack/react-router";
 
 export const SMART_DECARB_URL = "/platform";
+/** Temporarily hidden: /platform market benchmark table and pricing plans. */
+export const SHOW_PRICING = false;
 export const GLOBAL_RISK_URL = "https://www.weforum.org/publications/global-risks-report-2026";
 
 export type Product = {

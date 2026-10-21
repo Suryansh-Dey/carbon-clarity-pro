@@ -1,4 +1,5 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
+import { SHOW_PRICING } from "./content";
 import { Logo } from "./header";
 
 type FooterLink = { label: string; to: LinkProps["to"]; hash?: string };
@@ -21,7 +22,7 @@ const COLUMNS: { title: string; links: FooterLink[] }[] = [
       { label: "Emissions Calculator", to: "/calculator" },
       { label: "EU CBAM Exposure Screener", to: "/cbam-checker" },
       { label: "ESG Liability Estimator", to: "/platform", hash: "estimator" },
-      { label: "Pricing", to: "/platform", hash: "pricing" },
+      ...(SHOW_PRICING ? [{ label: "Pricing", to: "/platform", hash: "pricing" } as const] : []),
       { label: "Climate Risk Observatory", to: "/climate-risk/observatory" },
     ],
   },

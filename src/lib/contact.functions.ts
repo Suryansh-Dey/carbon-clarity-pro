@@ -1,5 +1,5 @@
 // "Start a conversation" enquiries: validated server-side and delivered to the
-// CliSo inbox through Gmail SMTP (EMAIL / EMAIL_PASSWORD app password).
+// CliSo team through Gmail SMTP (EMAIL / EMAIL_PASSWORD app password).
 
 import { createServerFn } from "@tanstack/react-start";
 import { getRequestHeader } from "@tanstack/react-start/server";
@@ -15,6 +15,13 @@ const EnquirySchema = z.object({
 });
 
 export type EnquiryResult = { ok: true } | { ok: false; error: string };
+
+/** Enquiry recipients. */
+const RECIPIENTS = [
+  "Swapnil.choure@clisomumbai.com",
+  "Praanjal.agarwal@clisomumbai.com",
+  "Business@clisomumbai.com",
+];
 
 const WINDOW_MS = 10 * 60 * 1000;
 const MAX_PER_WINDOW = 5;
@@ -59,7 +66,7 @@ export const sendEnquiry = createServerFn({ method: "POST" })
       const { transport, user } = mailer();
       await transport.sendMail({
         from: { name: "CliSo Tech website", address: user },
-        to: user,
+        to: RECIPIENTS,
         replyTo: { name, address: data.email },
         subject: `Website enquiry from ${name}`,
         text: `New enquiry from the CliSo Tech contact page\n\nName: ${name}\nEmail: ${data.email}\n\n${data.message}`,

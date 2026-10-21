@@ -65,7 +65,7 @@ import {
   Section,
   SectionHeading,
 } from "@/components/site/ui";
-import { SMART_DECARB_URL } from "@/components/site/content";
+import { SHOW_PRICING, SMART_DECARB_URL } from "@/components/site/content";
 
 export const Route = createFileRoute("/_site/platform")({
   head: () => ({
@@ -1264,309 +1264,329 @@ function PlatformPage() {
         </div>
       </RevealSection>
 
-      {/* 8. MARKET BENCHMARK COMPARISON TABLE */}
-      <RevealSection id="benchmark" className="scroll-mt-24 py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center mb-12">
-            <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-lavender">
-              Market Benchmark
-            </span>
-            <h2 className="font-display text-4xl sm:text-5xl text-foreground mt-3">
-              Why Indian Leaders Standardize on clisomumbai
-            </h2>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Comparison across regulatory assurance, CBAM automation, and total cost of ownership.
-            </p>
-          </div>
-
-          <div className="overflow-x-auto rounded-3xl border border-border glass shadow-sm">
-            <table className="w-full text-left text-sm">
-              <thead className="border-b border-border bg-white/[0.04] text-xs uppercase tracking-wider text-muted-foreground">
-                <tr>
-                  <th className="p-4 pl-6 font-semibold">Capability</th>
-                  <th className="p-4 font-bold text-primary bg-primary/10">clisomumbai</th>
-                  <th className="p-4 font-medium">NetZerra</th>
-                  <th className="p-4 font-medium">Tatva6</th>
-                  <th className="p-4 font-medium">Greenio</th>
-                  <th className="p-4 pr-6 font-medium">Big-4 Firms</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border/60 text-xs sm:text-sm">
-                <tr>
-                  <td className="p-4 pl-6 font-medium text-foreground">
-                    SEBI BRSR Core (Principle 6)
-                  </td>
-                  <td className="p-4 font-bold text-primary bg-primary/5">✓ Full 9 Attributes</td>
-                  <td className="p-4 text-muted-foreground">✗ (CBAM only)</td>
-                  <td className="p-4 text-foreground">✓ Partial</td>
-                  <td className="p-4 text-foreground">✓ Standard</td>
-                  <td className="p-4 text-muted-foreground">Manual Excel</td>
-                </tr>
-                <tr>
-                  <td className="p-4 pl-6 font-medium text-foreground">
-                    Water Stewardship (GRI 303 &amp; ZLD)
-                  </td>
-                  <td className="p-4 font-bold text-primary bg-primary/5">✓ Dedicated Module</td>
-                  <td className="p-4 text-muted-foreground">✗ None</td>
-                  <td className="p-4 text-foreground">✓ Present</td>
-                  <td className="p-4 text-muted-foreground">✗ None</td>
-                  <td className="p-4 text-muted-foreground">Manual Excel</td>
-                </tr>
-                <tr>
-                  <td className="p-4 pl-6 font-medium text-foreground">
-                    EU CBAM DG TAXUD XML Export
-                  </td>
-                  <td className="p-4 font-bold text-primary bg-primary/5">✓ Automated + HSN Map</td>
-                  <td className="p-4 text-foreground">✓ Automated</td>
-                  <td className="p-4 text-muted-foreground">✗ None</td>
-                  <td className="p-4 text-muted-foreground">✗ None</td>
-                  <td className="p-4 text-muted-foreground">₹5,00,000+</td>
-                </tr>
-                <tr>
-                  <td className="p-4 pl-6 font-medium text-foreground">
-                    Kigali ODP / GWP Refrigerants
-                  </td>
-                  <td className="p-4 font-bold text-primary bg-primary/5">✓ 50+ Substances</td>
-                  <td className="p-4 text-muted-foreground">✗ None</td>
-                  <td className="p-4 text-muted-foreground">✗ None</td>
-                  <td className="p-4 text-muted-foreground">Basic</td>
-                  <td className="p-4 text-muted-foreground">Separate fee</td>
-                </tr>
-                <tr>
-                  <td className="p-4 pl-6 font-medium text-foreground">
-                    Cryptographic Audit Pack (ZIP)
-                  </td>
-                  <td className="p-4 font-bold text-primary bg-primary/5">✓ SHA-256 Verified</td>
-                  <td className="p-4 text-muted-foreground">XML only</td>
-                  <td className="p-4 text-muted-foreground">PDF only</td>
-                  <td className="p-4 text-muted-foreground">PDF only</td>
-                  <td className="p-4 text-muted-foreground">Paper binders</td>
-                </tr>
-                <tr>
-                  <td className="p-4 pl-6 font-medium text-foreground">Pricing Structure</td>
-                  <td className="p-4 font-bold text-primary bg-primary/5">Transparent Tiered</td>
-                  <td className="p-4 text-foreground">₹1,50,000 / yr</td>
-                  <td className="p-4 text-foreground">Quote-based</td>
-                  <td className="p-4 text-foreground">₹2.9k - ₹49.9k/mo</td>
-                  <td className="p-4 text-muted-foreground">₹5L - ₹20L+</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </RevealSection>
-
-      {/* 9. TRANSPARENT PRICING GRID */}
-      <RevealSection id="pricing" className="scroll-mt-24 py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mx-auto text-center mb-12">
-            <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-lavender">
-              Pricing Plans
-            </span>
-            <h2 className="font-display text-4xl sm:text-5xl text-foreground mt-3">
-              Transparent, Scalable Investment
-            </h2>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Start free on our MSME tier and upgrade seamlessly as your facility compliance scales.
-            </p>
-
-            {/* Annual / Monthly Toggle */}
-            <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-border glass p-1 shadow-xs">
-              <button
-                onClick={() => setBillingCycle("monthly")}
-                className={`rounded-full px-5 py-1.5 text-xs font-semibold transition-all ${
-                  billingCycle === "monthly"
-                    ? "bg-primary text-primary-foreground shadow-xs"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                Monthly Billing
-              </button>
-              <button
-                onClick={() => setBillingCycle("annual")}
-                className={`rounded-full px-5 py-1.5 text-xs font-semibold transition-all flex items-center gap-1.5 ${
-                  billingCycle === "annual"
-                    ? "bg-primary text-primary-foreground shadow-xs"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                Annual Billing{" "}
-                <span className="text-[10px] bg-secondary px-2 py-0.5 rounded-full text-secondary-foreground font-bold">
-                  Save 17%
+      {SHOW_PRICING && (
+        <>
+          {/* 8. MARKET BENCHMARK COMPARISON TABLE */}
+          <RevealSection id="benchmark" className="scroll-mt-24 py-24">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div className="max-w-3xl mx-auto text-center mb-12">
+                <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-lavender">
+                  Market Benchmark
                 </span>
-              </button>
+                <h2 className="font-display text-4xl sm:text-5xl text-foreground mt-3">
+                  Why Indian Leaders Standardize on clisomumbai
+                </h2>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  Comparison across regulatory assurance, CBAM automation, and total cost of
+                  ownership.
+                </p>
+              </div>
+
+              <div className="overflow-x-auto rounded-3xl border border-border glass shadow-sm">
+                <table className="w-full text-left text-sm">
+                  <thead className="border-b border-border bg-white/[0.04] text-xs uppercase tracking-wider text-muted-foreground">
+                    <tr>
+                      <th className="p-4 pl-6 font-semibold">Capability</th>
+                      <th className="p-4 font-bold text-primary bg-primary/10">clisomumbai</th>
+                      <th className="p-4 font-medium">NetZerra</th>
+                      <th className="p-4 font-medium">Tatva6</th>
+                      <th className="p-4 font-medium">Greenio</th>
+                      <th className="p-4 pr-6 font-medium">Big-4 Firms</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-border/60 text-xs sm:text-sm">
+                    <tr>
+                      <td className="p-4 pl-6 font-medium text-foreground">
+                        SEBI BRSR Core (Principle 6)
+                      </td>
+                      <td className="p-4 font-bold text-primary bg-primary/5">
+                        ✓ Full 9 Attributes
+                      </td>
+                      <td className="p-4 text-muted-foreground">✗ (CBAM only)</td>
+                      <td className="p-4 text-foreground">✓ Partial</td>
+                      <td className="p-4 text-foreground">✓ Standard</td>
+                      <td className="p-4 text-muted-foreground">Manual Excel</td>
+                    </tr>
+                    <tr>
+                      <td className="p-4 pl-6 font-medium text-foreground">
+                        Water Stewardship (GRI 303 &amp; ZLD)
+                      </td>
+                      <td className="p-4 font-bold text-primary bg-primary/5">
+                        ✓ Dedicated Module
+                      </td>
+                      <td className="p-4 text-muted-foreground">✗ None</td>
+                      <td className="p-4 text-foreground">✓ Present</td>
+                      <td className="p-4 text-muted-foreground">✗ None</td>
+                      <td className="p-4 text-muted-foreground">Manual Excel</td>
+                    </tr>
+                    <tr>
+                      <td className="p-4 pl-6 font-medium text-foreground">
+                        EU CBAM DG TAXUD XML Export
+                      </td>
+                      <td className="p-4 font-bold text-primary bg-primary/5">
+                        ✓ Automated + HSN Map
+                      </td>
+                      <td className="p-4 text-foreground">✓ Automated</td>
+                      <td className="p-4 text-muted-foreground">✗ None</td>
+                      <td className="p-4 text-muted-foreground">✗ None</td>
+                      <td className="p-4 text-muted-foreground">₹5,00,000+</td>
+                    </tr>
+                    <tr>
+                      <td className="p-4 pl-6 font-medium text-foreground">
+                        Kigali ODP / GWP Refrigerants
+                      </td>
+                      <td className="p-4 font-bold text-primary bg-primary/5">✓ 50+ Substances</td>
+                      <td className="p-4 text-muted-foreground">✗ None</td>
+                      <td className="p-4 text-muted-foreground">✗ None</td>
+                      <td className="p-4 text-muted-foreground">Basic</td>
+                      <td className="p-4 text-muted-foreground">Separate fee</td>
+                    </tr>
+                    <tr>
+                      <td className="p-4 pl-6 font-medium text-foreground">
+                        Cryptographic Audit Pack (ZIP)
+                      </td>
+                      <td className="p-4 font-bold text-primary bg-primary/5">
+                        ✓ SHA-256 Verified
+                      </td>
+                      <td className="p-4 text-muted-foreground">XML only</td>
+                      <td className="p-4 text-muted-foreground">PDF only</td>
+                      <td className="p-4 text-muted-foreground">PDF only</td>
+                      <td className="p-4 text-muted-foreground">Paper binders</td>
+                    </tr>
+                    <tr>
+                      <td className="p-4 pl-6 font-medium text-foreground">Pricing Structure</td>
+                      <td className="p-4 font-bold text-primary bg-primary/5">
+                        Transparent Tiered
+                      </td>
+                      <td className="p-4 text-foreground">₹1,50,000 / yr</td>
+                      <td className="p-4 text-foreground">Quote-based</td>
+                      <td className="p-4 text-foreground">₹2.9k - ₹49.9k/mo</td>
+                      <td className="p-4 text-muted-foreground">₹5L - ₹20L+</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
+          </RevealSection>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Starter */}
-            <Card className="rounded-3xl border-border glass flex flex-col justify-between p-6 shadow-xs">
-              <div>
-                <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                  Starter / MSME
-                </div>
-                <div className="mt-4 mb-1">
-                  <span className="font-display text-4xl font-bold text-foreground">₹0</span>
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  Free forever for single facility
-                </div>
+          {/* 9. TRANSPARENT PRICING GRID */}
+          <RevealSection id="pricing" className="scroll-mt-24 py-24">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div className="max-w-2xl mx-auto text-center mb-12">
+                <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-lavender">
+                  Pricing Plans
+                </span>
+                <h2 className="font-display text-4xl sm:text-5xl text-foreground mt-3">
+                  Transparent, Scalable Investment
+                </h2>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  Start free on our MSME tier and upgrade seamlessly as your facility compliance
+                  scales.
+                </p>
 
-                <ul className="space-y-2.5 text-xs text-muted-foreground mt-6">
-                  <li className="flex items-start gap-2">
-                    <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" /> Scope 1 &amp; Scope 2
-                    direct ledger
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" /> 4 verified PDF
-                    reports per year
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" /> CEA Grid Baseline v19
-                    factors
-                  </li>
-                </ul>
+                {/* Annual / Monthly Toggle */}
+                <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-border glass p-1 shadow-xs">
+                  <button
+                    onClick={() => setBillingCycle("monthly")}
+                    className={`rounded-full px-5 py-1.5 text-xs font-semibold transition-all ${
+                      billingCycle === "monthly"
+                        ? "bg-primary text-primary-foreground shadow-xs"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    Monthly Billing
+                  </button>
+                  <button
+                    onClick={() => setBillingCycle("annual")}
+                    className={`rounded-full px-5 py-1.5 text-xs font-semibold transition-all flex items-center gap-1.5 ${
+                      billingCycle === "annual"
+                        ? "bg-primary text-primary-foreground shadow-xs"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    Annual Billing{" "}
+                    <span className="text-[10px] bg-secondary px-2 py-0.5 rounded-full text-secondary-foreground font-bold">
+                      Save 17%
+                    </span>
+                  </button>
+                </div>
               </div>
 
-              <Button
-                onClick={handleLaunchDemo}
-                variant="outline"
-                className="w-full mt-8 text-xs font-semibold"
-              >
-                Start Free
-              </Button>
-            </Card>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {/* Starter */}
+                <Card className="rounded-3xl border-border glass flex flex-col justify-between p-6 shadow-xs">
+                  <div>
+                    <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                      Starter / MSME
+                    </div>
+                    <div className="mt-4 mb-1">
+                      <span className="font-display text-4xl font-bold text-foreground">₹0</span>
+                    </div>
+                    <div className="text-xs text-muted-foreground">
+                      Free forever for single facility
+                    </div>
 
-            {/* Growth */}
-            <Card className="rounded-3xl border-border glass flex flex-col justify-between p-6 shadow-xs">
-              <div>
-                <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                  Growth
-                </div>
-                <div className="mt-4 mb-1">
-                  <span className="font-display text-4xl font-bold text-foreground">
-                    {billingCycle === "annual" ? "₹2,499" : "₹2,999"}
-                  </span>
-                  <span className="text-xs text-muted-foreground ml-1">/ month</span>
-                </div>
-                <div className="text-xs text-muted-foreground">For growing manufacturing units</div>
+                    <ul className="space-y-2.5 text-xs text-muted-foreground mt-6">
+                      <li className="flex items-start gap-2">
+                        <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" /> Scope 1 &amp;
+                        Scope 2 direct ledger
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" /> 4 verified PDF
+                        reports per year
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" /> CEA Grid Baseline
+                        v19 factors
+                      </li>
+                    </ul>
+                  </div>
 
-                <ul className="space-y-2.5 text-xs text-muted-foreground mt-6">
-                  <li className="flex items-start gap-2">
-                    <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" /> Everything in Starter
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" /> Scope 1, 2 &amp; 3
-                    Value Chain
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" /> Water Accounting
-                    &amp; GRI 303
-                  </li>
-                </ul>
+                  <Button
+                    onClick={handleLaunchDemo}
+                    variant="outline"
+                    className="w-full mt-8 text-xs font-semibold"
+                  >
+                    Start Free
+                  </Button>
+                </Card>
+
+                {/* Growth */}
+                <Card className="rounded-3xl border-border glass flex flex-col justify-between p-6 shadow-xs">
+                  <div>
+                    <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                      Growth
+                    </div>
+                    <div className="mt-4 mb-1">
+                      <span className="font-display text-4xl font-bold text-foreground">
+                        {billingCycle === "annual" ? "₹2,499" : "₹2,999"}
+                      </span>
+                      <span className="text-xs text-muted-foreground ml-1">/ month</span>
+                    </div>
+                    <div className="text-xs text-muted-foreground">
+                      For growing manufacturing units
+                    </div>
+
+                    <ul className="space-y-2.5 text-xs text-muted-foreground mt-6">
+                      <li className="flex items-start gap-2">
+                        <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" /> Everything in
+                        Starter
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" /> Scope 1, 2 &amp;
+                        3 Value Chain
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" /> Water Accounting
+                        &amp; GRI 303
+                      </li>
+                    </ul>
+                  </div>
+
+                  <Button
+                    onClick={handleLaunchDemo}
+                    variant="outline"
+                    className="w-full mt-8 text-xs font-semibold"
+                  >
+                    Choose Growth
+                  </Button>
+                </Card>
+
+                {/* Pro - Most Popular */}
+                <Card className="rounded-3xl border-2 border-primary glass flex flex-col justify-between p-6 relative shadow-lg">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-3 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary-foreground">
+                    Most Popular
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold uppercase tracking-wider text-primary">
+                      Pro Enterprise
+                    </div>
+                    <div className="mt-4 mb-1">
+                      <span className="font-display text-4xl font-bold text-foreground">
+                        {billingCycle === "annual" ? "₹4,999" : "₹5,999"}
+                      </span>
+                      <span className="text-xs text-muted-foreground ml-1">/ month</span>
+                    </div>
+                    <div className="text-xs text-muted-foreground">
+                      Full SEBI BRSR &amp; Decarbonization
+                    </div>
+
+                    <ul className="space-y-2.5 text-xs text-foreground mt-6">
+                      <li className="flex items-start gap-2">
+                        <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" /> Everything in
+                        Growth
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" /> SEBI BRSR
+                        Principle 6 Core exports
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" /> Kigali GWP/ODP
+                        Refrigerant Suite
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" /> Decarbonization
+                        ROI Roadmaps
+                      </li>
+                    </ul>
+                  </div>
+
+                  <Button
+                    onClick={handleLaunchDemo}
+                    className="w-full mt-8 text-xs font-bold shadow-sm"
+                  >
+                    Choose Pro
+                  </Button>
+                </Card>
+
+                {/* Enterprise / Exporter */}
+                <Card className="rounded-3xl border-border glass flex flex-col justify-between p-6 shadow-xs">
+                  <div>
+                    <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                      Exporter / Custom
+                    </div>
+                    <div className="mt-4 mb-1">
+                      <span className="font-display text-4xl font-bold text-foreground">
+                        {billingCycle === "annual" ? "₹39,999" : "₹49,999"}
+                      </span>
+                      <span className="text-xs text-muted-foreground ml-1">/ month</span>
+                    </div>
+                    <div className="text-xs text-muted-foreground">
+                      EU CBAM &amp; Multi-Facility Conglomerates
+                    </div>
+
+                    <ul className="space-y-2.5 text-xs text-muted-foreground mt-6">
+                      <li className="flex items-start gap-2">
+                        <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" /> Everything in Pro
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" /> EU CBAM XML
+                        Export Engine
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" /> Indian HSN ↔ EU
+                        CN Code Engine
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" /> SHA-256 Audit
+                        Evidence Pack ZIP
+                      </li>
+                    </ul>
+                  </div>
+
+                  <Button
+                    onClick={handleLaunchDemo}
+                    variant="outline"
+                    className="w-full mt-8 text-xs font-semibold"
+                  >
+                    Talk to Sales
+                  </Button>
+                </Card>
               </div>
-
-              <Button
-                onClick={handleLaunchDemo}
-                variant="outline"
-                className="w-full mt-8 text-xs font-semibold"
-              >
-                Choose Growth
-              </Button>
-            </Card>
-
-            {/* Pro - Most Popular */}
-            <Card className="rounded-3xl border-2 border-primary glass flex flex-col justify-between p-6 relative shadow-lg">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-3 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary-foreground">
-                Most Popular
-              </div>
-              <div>
-                <div className="text-xs font-bold uppercase tracking-wider text-primary">
-                  Pro Enterprise
-                </div>
-                <div className="mt-4 mb-1">
-                  <span className="font-display text-4xl font-bold text-foreground">
-                    {billingCycle === "annual" ? "₹4,999" : "₹5,999"}
-                  </span>
-                  <span className="text-xs text-muted-foreground ml-1">/ month</span>
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  Full SEBI BRSR &amp; Decarbonization
-                </div>
-
-                <ul className="space-y-2.5 text-xs text-foreground mt-6">
-                  <li className="flex items-start gap-2">
-                    <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" /> Everything in Growth
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" /> SEBI BRSR Principle 6
-                    Core exports
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" /> Kigali GWP/ODP
-                    Refrigerant Suite
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" /> Decarbonization ROI
-                    Roadmaps
-                  </li>
-                </ul>
-              </div>
-
-              <Button
-                onClick={handleLaunchDemo}
-                className="w-full mt-8 text-xs font-bold shadow-sm"
-              >
-                Choose Pro
-              </Button>
-            </Card>
-
-            {/* Enterprise / Exporter */}
-            <Card className="rounded-3xl border-border glass flex flex-col justify-between p-6 shadow-xs">
-              <div>
-                <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                  Exporter / Custom
-                </div>
-                <div className="mt-4 mb-1">
-                  <span className="font-display text-4xl font-bold text-foreground">
-                    {billingCycle === "annual" ? "₹39,999" : "₹49,999"}
-                  </span>
-                  <span className="text-xs text-muted-foreground ml-1">/ month</span>
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  EU CBAM &amp; Multi-Facility Conglomerates
-                </div>
-
-                <ul className="space-y-2.5 text-xs text-muted-foreground mt-6">
-                  <li className="flex items-start gap-2">
-                    <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" /> Everything in Pro
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" /> EU CBAM XML Export
-                    Engine
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" /> Indian HSN ↔ EU CN
-                    Code Engine
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" /> SHA-256 Audit
-                    Evidence Pack ZIP
-                  </li>
-                </ul>
-              </div>
-
-              <Button
-                onClick={handleLaunchDemo}
-                variant="outline"
-                className="w-full mt-8 text-xs font-semibold"
-              >
-                Talk to Sales
-              </Button>
-            </Card>
-          </div>
-        </div>
-      </RevealSection>
+            </div>
+          </RevealSection>
+        </>
+      )}
 
       {/* 10. ABOUT US & STORY */}
       <RevealSection id="story" className="scroll-mt-24 py-24">
