@@ -173,6 +173,92 @@
     background: rgb(115 108 237 / 0.45);
     color: #fff;
   }
+  /* Native <select> menus: the OS draws the option list, which otherwise
+     falls back to a white background under our white text. */
+  select {
+    color-scheme: dark;
+  }
+  select option,
+  select optgroup {
+    background-color: #0a0b1a;
+    color: #ffffff;
+  }
+  select option:checked {
+    background-color: #1f1d59;
+  }
+  select option:disabled {
+    color: #8e92aa;
+  }
+
+  /* Browsers with customizable selects get a fully themed picker. */
+  @supports (appearance: base-select) {
+    select,
+    ::picker(select) {
+      appearance: base-select;
+    }
+    select {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    select::picker-icon {
+      color: #8e92aa;
+      transition: rotate 0.2s ease;
+    }
+    select:open::picker-icon {
+      rotate: 180deg;
+    }
+    ::picker(select) {
+      /* Open below like a classic dropdown; flip only when it doesn't fit. */
+      position-try-order: normal;
+      max-block-size: min(320px, 70vh);
+      margin-block: 6px;
+      padding: 6px;
+      border: 1px solid rgb(159 162 232 / 0.22);
+      border-radius: 14px;
+      background: #0a0b1a;
+      color: #ffffff;
+      box-shadow:
+        0 24px 60px -20px rgb(0 0 0 / 0.9),
+        0 0 40px -18px rgb(115 108 237 / 0.6);
+      opacity: 0;
+      transform: perspective(700px) rotateX(-14deg) translateY(-4px);
+      transform-origin: top center;
+      transition:
+        opacity 0.2s ease,
+        transform 0.2s ease,
+        display 0.2s allow-discrete,
+        overlay 0.2s allow-discrete;
+    }
+    select:open::picker(select) {
+      opacity: 1;
+      transform: none;
+    }
+    @starting-style {
+      select:open::picker(select) {
+        opacity: 0;
+        transform: perspective(700px) rotateX(-14deg) translateY(-4px);
+      }
+    }
+    select option {
+      padding: 8px 12px;
+      border-radius: 9px;
+      background-color: transparent;
+      font-size: 0.875rem;
+    }
+    select option:hover,
+    select option:focus-visible {
+      background-color: rgb(115 108 237 / 0.2);
+      outline: none;
+    }
+    select option:checked {
+      background-color: #1f1d59;
+    }
+    select option::checkmark {
+      color: #9fa2e8;
+    }
+  }
   :focus-visible {
     outline: 2px solid #736ced;
     outline-offset: 2px;

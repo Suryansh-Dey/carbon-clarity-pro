@@ -112,7 +112,7 @@ export function SelectField({
       <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
         {label}
       </span>
-      <select className={cn(fieldCls, "pr-8")} {...rest}>
+      <select className={cn(fieldCls, "flex items-center justify-between gap-2 pr-3")} {...rest}>
         {children}
       </select>
     </label>

@@ -161,7 +161,7 @@ function ObservatoryPage() {
           <div className="max-w-3xl space-y-5">
             <Link
               to="/climate-risk"
-              className="inline-flex items-center gap-2 text-xs font-semibold text-muted-foreground transition-colors hover:text-white"
+              className="flex w-fit items-center gap-2 text-xs font-semibold text-muted-foreground transition-colors hover:text-white"
             >
               ← Climate risk assessment
             </Link>
