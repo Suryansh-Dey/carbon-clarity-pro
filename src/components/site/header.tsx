@@ -182,23 +182,14 @@ const NAV: NavItem[] = [
 
 export function Logo({ className }: { className?: string }) {
   return (
-    <Link to="/" className={cn("group flex items-center gap-2.5", className)}>
+    <Link to="/" className={cn("group flex shrink-0 items-center", className)}>
       <img
-        src="/brand/cliso-mark.png"
-        alt=""
-        width={44}
-        height={44}
-        className="h-11 w-11 shrink-0 transition-transform duration-500 group-hover:scale-105 group-hover:-rotate-6"
+        src="/brand/cliso-logo.png"
+        alt="CliSo"
+        width={154}
+        height={48}
+        className="h-[48.4px] w-auto transition-transform duration-500 group-hover:scale-[1.03]"
       />
-      <span className="flex flex-col leading-none">
-        <span className="font-brand text-2xl font-bold tracking-[0.01em]">
-          <span className="text-brand-teal">Cli</span>
-          <span className="text-brand-gold">So</span>
-        </span>
-        <span className="mt-1 text-[9px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
-          People &amp; Planet
-        </span>
-      </span>
     </Link>
   );
 }
