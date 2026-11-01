@@ -183,14 +183,17 @@ const NAV: NavItem[] = [
 export function Logo({ className }: { className?: string }) {
   return (
     <Link to="/" className={cn("group flex items-center gap-2.5", className)}>
-      <span className="relative grid h-9 w-9 place-items-center overflow-hidden rounded-xl bg-gradient-to-br from-periwinkle to-indigo-cosmic shadow-[0_0_24px_-4px_rgb(115_108_237/0.9)] transition-transform duration-500 group-hover:rotate-[20deg]">
-        <span className="absolute inset-[5px] rounded-full border border-white/70" />
-        <span className="absolute h-[2px] w-7 rotate-[-25deg] rounded-full bg-lavender/90" />
-        <span className="relative h-2 w-2 rounded-full bg-white" />
-      </span>
+      <img
+        src="/brand/cliso-mark.png"
+        alt=""
+        width={44}
+        height={44}
+        className="h-11 w-11 shrink-0 transition-transform duration-500 group-hover:scale-105 group-hover:-rotate-6"
+      />
       <span className="flex flex-col leading-none">
-        <span className="font-display text-xl tracking-tight text-white">
-          CliSo<span className="text-lavender"> Tech</span>
+        <span className="font-brand text-2xl font-bold tracking-[0.01em]">
+          <span className="text-brand-teal">Cli</span>
+          <span className="text-brand-gold">So</span>
         </span>
         <span className="mt-1 text-[9px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
           People &amp; Planet
