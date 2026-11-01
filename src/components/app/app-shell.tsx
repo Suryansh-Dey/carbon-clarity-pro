@@ -63,7 +63,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Mobile Header */}
-      <header className="glass-strong flex h-16 items-center justify-between border-x-0 border-t-0 px-4 text-sidebar-foreground md:hidden">
+      <header className="glass-strong flex h-[72px] items-center justify-between border-x-0 border-t-0 px-4 text-sidebar-foreground md:hidden">
         <Logo />
         <Sheet>
           <SheetTrigger asChild>
