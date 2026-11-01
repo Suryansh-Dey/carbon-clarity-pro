@@ -182,16 +182,23 @@ const NAV: NavItem[] = [
 
 export function Logo({ className }: { className?: string }) {
   return (
-    <Link to="/" className={cn("group flex shrink-0 flex-col items-start", className)}>
+    // The logo's deep teal was drawn for light paper, so it sits on a raised light badge.
+    <Link
+      to="/"
+      className={cn(
+        "flex w-fit shrink-0 flex-col items-start rounded-2xl bg-white/95 px-3 py-1 shadow-[0_10px_30px_-12px_rgb(115_108_237/0.75),0_2px_6px_rgb(0_0_0/0.35)] ring-1 ring-white/70 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_40px_-12px_rgb(115_108_237/0.95),0_3px_8px_rgb(0_0_0/0.4)]",
+        className,
+      )}
+    >
       <img
         src="/brand/cliso-logo.png"
         alt="CliSo"
         width={154}
         height={48}
-        className="h-[48.4px] w-auto transition-transform duration-500 group-hover:scale-[1.03]"
+        className="h-[48.4px] w-auto"
       />
       {/* Sits under the "CliSo" letters: they start 59.3px in and end ~41px down the 48.4px image. */}
-      <span className="-mt-1 ml-[59.3px] text-[9px] font-semibold uppercase leading-none tracking-[0.24em] text-muted-foreground">
+      <span className="-mt-1 ml-[59.3px] text-[9px] font-semibold uppercase leading-none tracking-[0.24em] text-midnight/70">
         People &amp; Planet
       </span>
     </Link>
@@ -221,7 +228,7 @@ export function SiteHeader() {
     <header className="fixed inset-x-0 top-0 z-50">
       <div
         className={cn(
-          "relative mx-auto mt-3 flex h-16 max-w-7xl items-center justify-between rounded-2xl px-4 transition-all duration-500 sm:px-6",
+          "relative mx-auto mt-3 flex h-[72px] max-w-7xl items-center justify-between rounded-2xl px-4 transition-all duration-500 sm:px-6",
           scrolled || open
             ? "glass-strong mx-3 shadow-[0_20px_60px_-30px_rgb(0_0_0/0.9)] sm:mx-6 lg:mx-auto"
             : "border border-transparent",

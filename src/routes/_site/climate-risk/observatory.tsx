@@ -197,7 +197,7 @@ function ObservatoryPage() {
         </Reveal>
       </section>
 
-      <div className="sticky top-[84px] z-30 mt-8">
+      <div className="sticky top-[92px] z-30 mt-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <nav
             aria-label="Observatory sections"
