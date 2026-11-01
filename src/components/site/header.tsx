@@ -182,7 +182,7 @@ const NAV: NavItem[] = [
 
 export function Logo({ className }: { className?: string }) {
   return (
-    <Link to="/" className={cn("group flex shrink-0 items-center", className)}>
+    <Link to="/" className={cn("group flex shrink-0 flex-col items-start", className)}>
       <img
         src="/brand/cliso-logo.png"
         alt="CliSo"
@@ -190,6 +190,10 @@ export function Logo({ className }: { className?: string }) {
         height={48}
         className="h-[48.4px] w-auto transition-transform duration-500 group-hover:scale-[1.03]"
       />
+      {/* Sits under the "CliSo" letters: they start 59.3px in and end ~41px down the 48.4px image. */}
+      <span className="-mt-1 ml-[59.3px] text-[9px] font-semibold uppercase leading-none tracking-[0.24em] text-muted-foreground">
+        People &amp; Planet
+      </span>
     </Link>
   );
 }
