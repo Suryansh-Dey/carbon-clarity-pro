@@ -107,7 +107,7 @@ Assurance Alignment: ASSA 5010 / SEBI Circular SEBI/HO/CFD/CFD-SEC-2/P/CIR/2023/
 
 PARAMETER,DISCLOSURE VALUE,UNIT,METHODOLOGY / STANDARD
 1. Scope 1 Direct Emissions,${metrics.scope1Tonnes},Metric Tonnes CO2e,IPCC 2006 / GHG Protocol
-2. Scope 2 Indirect Electricity Emissions,${metrics.scope2Tonnes},Metric Tonnes CO2e,India CEA Baseline Database v19 (0.716 kg CO2/kWh)
+2. Scope 2 Indirect Electricity Emissions,${metrics.scope2Tonnes},Metric Tonnes CO2e,India CEA Baseline Database v22.0 (0.675 kg CO2/kWh)
 3. Scope 3 Value Chain Emissions,${metrics.scope3Tonnes},Metric Tonnes CO2e,DEFRA 2024 / GHG Protocol Scope 3 Standard
 4. TOTAL CORPORATE GHG INVENTORY,${metrics.totalGhgTonnes},Metric Tonnes CO2e,Verified ASSA 5010 Physical Trail
 5. Total Energy Consumption,${metrics.totalEnergyMWh},Megawatt-Hours (MWh),Fuel & Grid Invoices

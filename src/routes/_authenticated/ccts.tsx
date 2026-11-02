@@ -500,7 +500,7 @@ function CctsPage() {
             <Card className="rounded-2xl border-border bg-card">
               <CardHeader>
                 <CardTitle className="font-display text-lg font-medium">
-                  Central Electricity Authority (CEA) Baseline Database v19
+                  Central Electricity Authority (CEA) Baseline Database v22.0 (FY 2025-26)
                 </CardTitle>
                 <CardDescription>
                   Verified regional grid emission factors applicable across Indian states for Scope

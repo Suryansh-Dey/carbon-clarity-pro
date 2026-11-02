@@ -20,32 +20,32 @@ export type RegionalCeaGrid = {
 export const CEA_REGIONAL_GRIDS: Record<string, RegionalCeaGrid> = {
   national_avg: {
     region: "National Grid Average (India)",
-    gridFactorKgPerKwh: 0.716,
+    gridFactorKgPerKwh: 0.675,
     states: ["All India Consolidated Average"],
   },
   western_grid: {
     region: "Western Regional Grid",
-    gridFactorKgPerKwh: 0.745,
+    gridFactorKgPerKwh: 0.702,
     states: ["Maharashtra", "Gujarat", "Madhya Pradesh", "Chhattisgarh", "Goa"],
   },
   northern_grid: {
     region: "Northern Regional Grid",
-    gridFactorKgPerKwh: 0.730,
+    gridFactorKgPerKwh: 0.688,
     states: ["Delhi", "Haryana", "Punjab", "Uttar Pradesh", "Rajasthan", "Himachal Pradesh"],
   },
   southern_grid: {
     region: "Southern Regional Grid",
-    gridFactorKgPerKwh: 0.690,
+    gridFactorKgPerKwh: 0.651,
     states: ["Karnataka", "Tamil Nadu", "Andhra Pradesh", "Telangana", "Kerala"],
   },
   eastern_grid: {
     region: "Eastern Regional Grid",
-    gridFactorKgPerKwh: 0.810,
+    gridFactorKgPerKwh: 0.764,
     states: ["West Bengal", "Odisha", "Jharkhand", "Bihar"],
   },
   northeastern_grid: {
     region: "North-Eastern Regional Grid",
-    gridFactorKgPerKwh: 0.520,
+    gridFactorKgPerKwh: 0.490,
     states: ["Assam", "Meghalaya", "Tripura", "Arunachal Pradesh"],
   },
 };
