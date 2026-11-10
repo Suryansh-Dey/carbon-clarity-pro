@@ -1,5 +1,14 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Activity, ClipboardCheck, Globe2, LineChart } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import {
+  Activity,
+  ArrowRight,
+  Building2,
+  ClipboardCheck,
+  Factory,
+  Globe2,
+  LineChart,
+  Scale,
+} from "lucide-react";
 import { HeroCanvas } from "@/components/site/hero-canvas";
 import { Reveal, Stagger, StaggerItem, Tilt } from "@/components/site/motion";
 import { CtaLink, Eyebrow, GlassCard, Note, Section, SectionHeading } from "@/components/site/ui";
@@ -45,6 +54,27 @@ const PILLARS = [
     d: "Risk-management checklists, assessment export and a registry of international and Indian climate and disaster resources.",
   },
 ];
+
+const PLATFORM = [
+  {
+    m: undefined,
+    icon: Building2,
+    t: "Cities & districts",
+    d: "14 city profiles and all 640 Indian districts",
+  },
+  {
+    m: "entities",
+    icon: Factory,
+    t: "Entities & sites",
+    d: "Company sites on 19,550 Indian pincodes",
+  },
+  {
+    m: "standards",
+    icon: Scale,
+    t: "Standards & regulation",
+    d: "How the platform maps to ISSB, BRSR and more",
+  },
+] as const;
 
 function ClimateRiskPage() {
   return (
@@ -119,6 +149,47 @@ function ClimateRiskPage() {
             </p>
           </div>
         </Reveal>
+      </Section>
+
+      <Section className="pt-0 sm:pt-0">
+        <div className="grid items-end gap-12 lg:grid-cols-2">
+          <SectionHeading
+            eyebrow="CliSo Climate Risk Platform"
+            title="People first."
+            accent="Then the price of risk."
+            description="Cities and districts, company sites and the standards they report to, scored for eight hazards under three IPCC scenarios and three horizons."
+          />
+          <Reveal className="lg:justify-self-end">
+            <CtaLink to="/climate-risk/platform">Open the Climate Risk Platform</CtaLink>
+          </Reveal>
+        </div>
+        <Stagger className="mt-12 grid gap-5 md:grid-cols-3">
+          {PLATFORM.map((p) => (
+            <StaggerItem key={p.t}>
+              <Tilt className="h-full rounded-3xl">
+                <Link
+                  to="/climate-risk/platform"
+                  search={p.m ? { m: p.m } : {}}
+                  className="group block h-full"
+                >
+                  <GlassCard className="flex h-full flex-col gap-5 p-7 transition-colors group-hover:border-periwinkle/40">
+                    <span className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-periwinkle to-indigo-cosmic text-white shadow-[0_0_40px_-10px_rgb(115_108_237/1)]">
+                      <p.icon className="h-5 w-5" />
+                    </span>
+                    <div className="space-y-2">
+                      <h3 className="font-display text-2xl text-white">{p.t}</h3>
+                      <p className="text-sm leading-relaxed text-muted-foreground">{p.d}</p>
+                    </div>
+                    <span className="mt-auto flex items-center gap-2 text-sm font-semibold text-lavender transition-colors group-hover:text-white">
+                      Open
+                      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                    </span>
+                  </GlassCard>
+                </Link>
+              </Tilt>
+            </StaggerItem>
+          ))}
+        </Stagger>
       </Section>
 
       <ContactBand />

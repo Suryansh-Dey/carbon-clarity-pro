@@ -34,6 +34,7 @@ import { Route as SiteResourcesRouteImport } from './routes/_site/resources'
 import { Route as SiteServicesRouteImport } from './routes/_site/services'
 import { Route as SiteClimateRiskIndexRouteImport } from './routes/_site/climate-risk/index'
 import { Route as SiteClimateRiskObservatoryRouteImport } from './routes/_site/climate-risk/observatory'
+import { Route as SiteClimateRiskPlatformRouteImport } from './routes/_site/climate-risk/platform'
 
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
@@ -162,6 +163,11 @@ const SiteClimateRiskObservatoryRoute =
     path: '/climate-risk/observatory',
     getParentRoute: () => SiteRouteRoute,
   } as any)
+const SiteClimateRiskPlatformRoute = SiteClimateRiskPlatformRouteImport.update({
+  id: '/climate-risk/platform',
+  path: '/climate-risk/platform',
+  getParentRoute: () => SiteRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof SiteIndexRoute
@@ -186,6 +192,7 @@ export interface FileRoutesByFullPath {
   '/resources': typeof SiteResourcesRoute
   '/services': typeof SiteServicesRoute
   '/climate-risk/observatory': typeof SiteClimateRiskObservatoryRoute
+  '/climate-risk/platform': typeof SiteClimateRiskPlatformRoute
   '/climate-risk/': typeof SiteClimateRiskIndexRoute
 }
 export interface FileRoutesByTo {
@@ -211,6 +218,7 @@ export interface FileRoutesByTo {
   '/resources': typeof SiteResourcesRoute
   '/services': typeof SiteServicesRoute
   '/climate-risk/observatory': typeof SiteClimateRiskObservatoryRoute
+  '/climate-risk/platform': typeof SiteClimateRiskPlatformRoute
   '/climate-risk': typeof SiteClimateRiskIndexRoute
 }
 export interface FileRoutesById {
@@ -239,6 +247,7 @@ export interface FileRoutesById {
   '/_site/services': typeof SiteServicesRoute
   '/_site/': typeof SiteIndexRoute
   '/_site/climate-risk/observatory': typeof SiteClimateRiskObservatoryRoute
+  '/_site/climate-risk/platform': typeof SiteClimateRiskPlatformRoute
   '/_site/climate-risk/': typeof SiteClimateRiskIndexRoute
 }
 export interface FileRouteTypes {
@@ -266,6 +275,7 @@ export interface FileRouteTypes {
     | '/resources'
     | '/services'
     | '/climate-risk/observatory'
+    | '/climate-risk/platform'
     | '/climate-risk/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -291,6 +301,7 @@ export interface FileRouteTypes {
     | '/resources'
     | '/services'
     | '/climate-risk/observatory'
+    | '/climate-risk/platform'
     | '/climate-risk'
   id:
     | '__root__'
@@ -318,6 +329,7 @@ export interface FileRouteTypes {
     | '/_site/services'
     | '/_site/'
     | '/_site/climate-risk/observatory'
+    | '/_site/climate-risk/platform'
     | '/_site/climate-risk/'
   fileRoutesById: FileRoutesById
 }
@@ -504,6 +516,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteClimateRiskObservatoryRouteImport
       parentRoute: typeof SiteRouteRoute
     }
+    '/_site/climate-risk/platform': {
+      id: '/_site/climate-risk/platform'
+      path: '/climate-risk/platform'
+      fullPath: '/climate-risk/platform'
+      preLoaderRoute: typeof SiteClimateRiskPlatformRouteImport
+      parentRoute: typeof SiteRouteRoute
+    }
   }
 }
 
@@ -550,6 +569,7 @@ interface SiteRouteRouteChildren {
   SiteServicesRoute: typeof SiteServicesRoute
   SiteIndexRoute: typeof SiteIndexRoute
   SiteClimateRiskObservatoryRoute: typeof SiteClimateRiskObservatoryRoute
+  SiteClimateRiskPlatformRoute: typeof SiteClimateRiskPlatformRoute
   SiteClimateRiskIndexRoute: typeof SiteClimateRiskIndexRoute
 }
 
@@ -563,6 +583,7 @@ const SiteRouteRouteChildren: SiteRouteRouteChildren = {
   SiteServicesRoute: SiteServicesRoute,
   SiteIndexRoute: SiteIndexRoute,
   SiteClimateRiskObservatoryRoute: SiteClimateRiskObservatoryRoute,
+  SiteClimateRiskPlatformRoute: SiteClimateRiskPlatformRoute,
   SiteClimateRiskIndexRoute: SiteClimateRiskIndexRoute,
 }
 
