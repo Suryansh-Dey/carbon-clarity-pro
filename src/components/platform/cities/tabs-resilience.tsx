@@ -228,7 +228,7 @@ const DISTRICT_SOURCES: [string, string | null, string][] = [
   [
     "DataMeet 2011 district boundaries",
     "https://github.com/datameet/maps",
-    "District areas and the map",
+    "District areas and the map; India’s outline from DataMeet’s Survey of India boundary",
   ],
   [
     "AWS Terrain Tiles (SRTM-based) and Natural Earth 1:10m",

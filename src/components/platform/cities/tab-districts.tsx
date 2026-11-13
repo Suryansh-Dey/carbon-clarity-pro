@@ -5,6 +5,7 @@ import { fmt } from "../format";
 import { Card, RiskLegend, Table, riskColor } from "../ui";
 import type { CityCtx } from "./context";
 import { HAZARDS, HORIZONS, SSP_NAMES } from "./data/content";
+import { LEH_PATH, LEH_ROW, MUZAFFARABAD_MIRPUR_PATH } from "./data/kashmir";
 import { districtRows, ranked, type DistrictResult } from "./model";
 
 const METRICS: [string, string][] = [
@@ -26,6 +27,10 @@ function value(r: DistrictResult, m: string) {
 
 const loadMap = () =>
   import("./data/district-map.json").then((m) => m.default as unknown as [number, string][]);
+
+/** Hover id for Muzaffarabad and Mirpur, which have no census district row. */
+const MM = -1;
+const JK = "Jammu and Kashmir";
 
 const linkCls =
   "text-left font-semibold text-lavender underline decoration-lavender/30 underline-offset-4 hover:text-white";
@@ -76,29 +81,50 @@ export function DistrictsTab({ districts, si, hi, inr, pick, ui, setUi }: CityCt
     return (v: number) => (isH ? v : 1 + 4 * q(v));
   }, [rows, IM, isH]);
 
+  // Muzaffarabad and Mirpur take the average of Jammu and Kashmir's census districts.
+  const jkAvg = useMemo(() => {
+    const L = rows.filter((r) => r.c.region === JK);
+    const v = L.reduce((a, r) => a + value(r, IM), 0) / (L.length || 1);
+    return IM == "hot" ? Math.round(v) : v;
+  }, [rows, IM]);
+
   const paths = useMemo(
     () =>
       map.data && rows.length
-        ? map.data.map(([i, d]) => {
-            const r = rows[i];
-            const dim = IS !== "" && r.c.region !== states[+IS];
-            return (
-              <path
-                key={i}
-                d={d}
-                data-i={i}
-                fill={riskColor(level(value(r, IM)))}
-                stroke="#0a0b1a"
-                strokeWidth={0.4}
-                opacity={dim ? 0.22 : 1}
-                className="cursor-pointer transition-opacity hover:opacity-80"
-              >
-                <title>{`${r.c.district!.dname}, ${r.c.region}`}</title>
-              </path>
-            );
-          })
+        ? [
+            ...map.data.map(([i, d]) => {
+              const r = rows[i];
+              const dim = IS !== "" && r.c.region !== states[+IS];
+              return (
+                <path
+                  key={i}
+                  d={i === LEH_ROW ? LEH_PATH : d}
+                  data-i={i}
+                  fill={riskColor(level(value(r, IM)))}
+                  stroke="#0a0b1a"
+                  strokeWidth={0.4}
+                  opacity={dim ? 0.22 : 1}
+                  className="cursor-pointer transition-opacity hover:opacity-80"
+                >
+                  <title>{`${r.c.district!.dname}, ${r.c.region}`}</title>
+                </path>
+              );
+            }),
+            <path
+              key="mm"
+              d={MUZAFFARABAD_MIRPUR_PATH}
+              data-i={MM}
+              fill={riskColor(level(jkAvg))}
+              stroke="#0a0b1a"
+              strokeWidth={0.4}
+              opacity={IS !== "" && states[+IS] !== JK ? 0.22 : 1}
+              className="transition-opacity hover:opacity-80"
+            >
+              <title>{`Muzaffarabad and Mirpur, ${JK}`}</title>
+            </path>,
+          ]
         : null,
-    [map.data, rows, IM, IS, level, states],
+    [map.data, rows, IM, IS, level, states, jkAvg],
   );
 
   if (!districts)
@@ -124,7 +150,16 @@ export function DistrictsTab({ districts, si, hi, inr, pick, ui, setUi }: CityCt
       };
     })
     .sort((a, b) => b.e - a.e);
-  const hv = hover != null ? rows[hover] : null;
+  const tip =
+    hover == null
+      ? null
+      : hover === MM
+        ? { name: "Muzaffarabad and Mirpur", region: JK, v: jkAvg, note: true }
+        : {
+            name: rows[hover].c.district!.dname,
+            region: rows[hover].c.region,
+            v: value(rows[hover], IM),
+          };
 
   return (
     <div className="space-y-5">
@@ -177,8 +212,8 @@ export function DistrictsTab({ districts, si, hi, inr, pick, ui, setUi }: CityCt
               }}
               onMouseLeave={() => setHover(null)}
               onClick={(e) => {
-                const i = (e.target as Element).getAttribute("data-i");
-                if (i != null) pick(rows[Number(i)].c.id);
+                const i = Number((e.target as Element).getAttribute("data-i") ?? MM);
+                if (i >= 0) pick(rows[i].c.id);
               }}
             >
               {paths}
@@ -188,21 +223,27 @@ export function DistrictsTab({ districts, si, hi, inr, pick, ui, setUi }: CityCt
               Loading the map…
             </div>
           )}
-          {hv && (
-            <div className="pointer-events-none absolute left-0 top-0 rounded-2xl border border-white/10 bg-midnight/95 px-4 py-3 text-xs shadow-[0_20px_50px_-20px_rgb(0_0_0/0.9)] backdrop-blur">
-              <p className="font-semibold text-white">{hv.c.district!.dname}</p>
-              <p className="text-muted-foreground">{hv.c.region}</p>
+          {tip && (
+            <div className="pointer-events-none absolute right-0 top-0 max-w-[240px] rounded-2xl border border-white/10 bg-midnight/95 px-4 py-3 text-xs shadow-[0_20px_50px_-20px_rgb(0_0_0/0.9)] backdrop-blur">
+              <p className="font-semibold text-white">{tip.name}</p>
+              <p className="text-muted-foreground">{tip.region}</p>
               <p className="mt-1.5 text-muted-foreground">
-                {lbl}: <b className="text-white">{fmtV(value(hv, IM))}</b>
+                {lbl}: <b className="text-white">{fmtV(tip.v)}</b>
               </p>
+              {tip.note && (
+                <p className="mt-1 text-muted-foreground">
+                  Average of Jammu and Kashmir’s districts; not covered by Census 2011.
+                </p>
+              )}
             </div>
           )}
         </div>
         <div className="mt-4">
           <RiskLegend low={isH ? "Score 1" : "Lowest fifth"} high={isH ? "5" : "Highest fifth"} />
           <p className="mt-2 text-center text-xs text-muted-foreground">
-            Shows census districts with data. Not an authoritative depiction of India’s external
-            boundaries; see Survey of India maps.
+            India’s outline follows the Survey of India map (DataMeet, simplified). Gilgit-Baltistan
+            is shown within Leh district; Muzaffarabad and Mirpur, not covered by Census 2011, take
+            the average of Jammu and Kashmir’s districts.
           </p>
         </div>
       </Card>
